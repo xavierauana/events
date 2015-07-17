@@ -1,0 +1,32 @@
+{
+  "name": "events",
+  "version": "0.1",
+  "authors": [
+    "xavier au <xavier.au@anacreation.com>"
+  ],
+  "description": "events projects",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "events"
+  ],
+  "license": "PRIVATE",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue": "~0.12.4",
+    "jquery": "~2.1.4",
+    "moment": "~2.10.3",
+    "bootstrap": "~3.3.5",
+    "underscore": "~1.8.3",
+    "fontawesome": "~4.3.0",
+    "clndr": "~1.2.12",
+    "vue-resource": "~0.1.3"
+  }
+}
