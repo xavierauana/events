@@ -34,6 +34,19 @@
 #vue {
   padding-top: 0;
 }
+#vue #catSelector {
+  margin-top: 20px;
+}
+#vue #displayMonth {
+  height: 300px;
+  background-color: #fdd204;
+}
+#vue #displayMonth p#currentMonth {
+  position: absolute;
+  bottom: 0;
+  font-size: 4em;
+  font-weight: 900;
+}
 #vue .page-title {
   position: relative;
   background-color: #fdd204;

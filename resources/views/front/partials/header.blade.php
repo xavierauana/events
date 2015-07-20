@@ -24,9 +24,9 @@
             <div class="collapse navbar-collapse" id="collapse-nav">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/about">關於我們</a></li>
-                    <li><a href="#">展覽</a></li>
-                    <li><a href="#">專題報導</a></li>
-                    <li><a href="#">個人或團體</a></li>
+                    <li><a href="/events">展覽</a></li>
+                    <li><a href="/articles">專題報導</a></li>
+                    <li><a href="/groups">個人或團體</a></li>
                     <li><a href="#">報料</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="padding:10px 15px">

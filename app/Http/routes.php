@@ -53,6 +53,15 @@
     Route::get('about', function(){
         return view('front.pages.single:about');
     });
+    Route::get('groups', function(){
+        return view('front.pages.channel:groups_index');
+    });
+    Route::get('writers', function(){
+        return view('front.pages.channel:writers_index');
+    });
+    Route::get('writers/{id}', function(){
+        return view('front.pages.channel:writers');
+    });
     Route::get('login', function(){
         return view('front.pages.single:login');
     });

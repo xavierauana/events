@@ -21,9 +21,16 @@
             <div class="control_button right" v-on="click: changeMonth(+1)"><i class="fa fa-chevron-right"></i></div>
             @{{ currentMonth }}
         </div>
-
-        <div class="col-md-4 col-xs-6" id="date" style="background-color: yellow">
-
+        <div class="row" id="catSelector">
+            <div class="col-xs-12 col-md-3 pull-right">
+                {{--  Form Input--}}
+                <div class="form-group">
+                    {!! Form::select("category",["Dance","Martial Art"],null,["class"=>"form-control"]) !!}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-6" id="displayMonth">
+            <p id="currentMonth"></p>
         </div>
         {{--The following is the events block move right--}}
         <div class="col-md-4 col-xs-6 carouselContainer" v-repeat="blocks">
@@ -57,6 +64,7 @@
 @endsection
 
 @section('scripts')
+    <script src="/js/monthBundle.js"></script>
     <script>
 
         // parse query string form url
@@ -68,11 +76,11 @@
         }
 
         // set page title
-        $(".page-title").text(queryString.cat);
+        $(".page-title").text(queryString.cat.toUpperCase());
 
         // set date
         var date;
         queryString.hasOwnProperty("date")? date = moment(queryString.date, "YYYYMM").format("MMMM"): date = moment().format("MMMM");
-        $("#date").text(date.toUpperCase());
+        $("#currentMonth").text(date.toUpperCase());
     </script>
 @endsection
