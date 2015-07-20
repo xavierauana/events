@@ -47,13 +47,13 @@
         </div>
         <div class="col-xs-12 col-sm-6 col-sm-pull-6">
             <ul class="list-inline">
-                <li><a href="testi">Q & A</a></li>
+                <li><a href="/faq">Q & A</a></li>
                 <li><a href="testi">TERMS OF SERVICES</a></li>
                 <li><a href="testi">PRIVACY POLICY</a></li>
                 <li><a href="testi">技術支援</a></li>
                 <li><a href="testi">訂閱通訊</a></li>
                 <li><a href="testi">SITE MAP</a></li>
-                <li><a href="testi">聯絡我們</a></li>
+                <li><a href="/contact">聯絡我們</a></li>
             </ul>
             <br class="hidden-xs" />
             <br class="hidden-xs" />

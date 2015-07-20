@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-xs-5 carousel-caption">
                             <p>@{{ description }}</p>
-                            <a href="@{{ id }}" class="link_detail">More <i class="fa fa-chevron-right"></i></a>
+                            <a href="/events/detail/@{{ id }}" class="link_detail">More <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                     <!-- Left and right controls -->

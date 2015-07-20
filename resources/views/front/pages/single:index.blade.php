@@ -30,28 +30,28 @@
                     <img src="http://lorempixel.com/900/500/animals/" width="100%" alt="...">
                     <div class="carousel-caption">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa delectus deserunt dolore exercitationem quae vero, voluptatem! Eaque, in qui.
-                        <a href="#" style="bottom:5%; right:75%; position:absolute">MORE <i class="fa fa-chevron-right"></i></a>
+                        <a href="/events/detail" style="bottom:5%; right:75%; position:absolute">MORE <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
                 <div class="item ">
                     <img src="http://lorempixel.com/900/500/city/" width="100%" alt="...">
                     <div class="carousel-caption">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa delectus deserunt dolore exercitationem quae vero, voluptatem! Eaque, in qui.
-                        <a href="#" style="bottom:5%; right:75%; position:absolute">MORE <i class="fa fa-chevron-right"></i></a>
+                        <a href="/events/detail" style="bottom:5%; right:75%; position:absolute">MORE <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
                 <div class="item ">
                     <img src="http://lorempixel.com/900/500/sports/" width="100%" alt="...">
                     <div class="carousel-caption">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa delectus deserunt dolore exercitationem quae vero, voluptatem! Eaque, in qui.
-                        <a href="#" style="bottom:5%; right:75%; position:absolute">MORE <i class="fa fa-chevron-right"></i></a>
+                        <a href="/events/detail" style="bottom:5%; right:75%; position:absolute">MORE <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
                 <div class="item ">
                     <img src="http://lorempixel.com/900/500/nature/" width="100%" alt="...">
                     <div class="carousel-caption">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa delectus deserunt dolore exercitationem quae vero, voluptatem! Eaque, in qui.
-                        <a href="#" style="bottom:5%; right:75%; position:absolute">MORE <i class="fa fa-chevron-right"></i></a>
+                        <a href="/events/detail" style="bottom:5%; right:75%; position:absolute">MORE <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
 
@@ -88,7 +88,7 @@
                         </div>
                         <div class="col-xs-5 carousel-caption">
                             <p>@{{ description }}</p>
-                            <a href="@{{ id }}" class="link_detail">More <i class="fa fa-chevron-right"></i></a>
+                            <a href="/events/detail/@{{ id }}" class="link_detail">More <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                     <!-- Left and right controls -->

@@ -16,9 +16,12 @@
     });
 
 //    Route::get('/', 'WelcomeController@index');
-    Route::get('/', function(){
-        return view('front.pages.single:index');
-    });
+    Route::get('/', [
+        "as"=>"home",
+        "uses" => function(){
+            return view('front.pages.single:index');
+        }
+    ]);
 
     Route::get('basic', function(){
         return view('front.pages.single:basic');
@@ -27,7 +30,7 @@
     Route::get('events', function(){
         return view('front.pages.channel:events_index');
     });
-    Route::get('events/detail', function(){
+    Route::get('events/detail/{id?}', function(){
         return view('front.pages.channel:events');
     });
 
@@ -46,6 +49,9 @@
     });
     Route::get('contact', function(){
         return view('front.pages.single:contact');
+    });
+    Route::get('about', function(){
+        return view('front.pages.single:about');
     });
     Route::get('login', function(){
         return view('front.pages.single:login');
