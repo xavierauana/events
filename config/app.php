@@ -137,12 +137,15 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
+        Xavierau\RoleBaseAuthentication\RoleBaseAuthenticationServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
+        App\Providers\InterfaceBindingServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\SettingServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],

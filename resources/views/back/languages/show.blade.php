@@ -1,0 +1,1 @@
+/home/vagrant/Code/prettyrenew/app/views/Languages/show.blade.php

@@ -7,8 +7,12 @@
             </a>
         </div>
         <ul class="list-inline pull-right" style="margin-right:15px ">
-            <li><a href="/auth/register">註冊</a></li>
-            <li><a href="/auth/login">登錄</a></li>
+            @if(Auth::user())
+                <li><a href="{{route("admin.profile")}}">{{Auth::user()->name}}</a></li>
+            @else
+                <li><a href="/auth/register">註冊</a></li>
+                <li><a href="/auth/login">登錄</a></li>
+            @endif
         </ul>
     </div>
     <nav class="navbar navbar-default">
