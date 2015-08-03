@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
         $this->call(RoleTableSeeder::class);
 
         (new Initializer())->initialize();
-        
+
         // supposed to only apply to a single connection and reset it's self
         // but I like to explicitly undo what I've done for clarity
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

@@ -20,9 +20,7 @@
         ];
 
         // Delete all record first
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('languages')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // Uncomment the below to run the seeder
         DB::table('languages')->insert($user);

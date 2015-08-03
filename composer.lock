@@ -1746,12 +1746,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xavierauana/RoleBaseAuthentication.git",
-                "reference": "91cad25fa59c8427b4170e02dc3d50c75127026d"
+                "reference": "5c805aed96e61be646807e5736ad2e9db919ebb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xavierauana/RoleBaseAuthentication/zipball/91cad25fa59c8427b4170e02dc3d50c75127026d",
-                "reference": "91cad25fa59c8427b4170e02dc3d50c75127026d",
+                "url": "https://api.github.com/repos/xavierauana/RoleBaseAuthentication/zipball/5c805aed96e61be646807e5736ad2e9db919ebb8",
+                "reference": "5c805aed96e61be646807e5736ad2e9db919ebb8",
                 "shasum": ""
             },
             "require": {
@@ -1771,7 +1771,7 @@
                 }
             ],
             "description": "Role base authentication",
-            "time": "2015-08-03 08:56:23"
+            "time": "2015-08-03 10:29:29"
         }
     ],
     "packages-dev": [

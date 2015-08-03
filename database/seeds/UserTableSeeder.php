@@ -19,9 +19,7 @@ use Illuminate\Database\Seeder;
         ];
 
         // Delete all record first
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('users')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // Uncomment the below to run the seeder
         DB::table('users')->insert($user);
