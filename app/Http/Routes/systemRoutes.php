@@ -8,9 +8,6 @@
     /*
      * This section is all the operation in the backend CMS system
      */
-
-    use App\Entities\Layout;
-
     Route::group(array('middleware'=>'auth'), function(){
 
         Route::get('dashboard', array(
@@ -55,7 +52,6 @@
                 "uses"=>"ContentFieldsController@update"
             ]);
 
-
             /*
              * This is the section for managing role base authentication
              */
@@ -78,7 +74,6 @@
         'auth' => 'Auth\AuthController',
         'password' => 'Auth\PasswordController',
     ]);
-
 
     Route::group(['prefix'=>'api'], function(){
         Route::any('/{segment1?}/{segment2?}/{segment3?}/{segment4?}', 'RoutesController@route');
