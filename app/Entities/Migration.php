@@ -50,7 +50,6 @@ class Migration {
      */
     public function createLayoutTables($contentFields)
     {
-        dd($contentFields);
         foreach ($contentFields as $layout => $fields) {
             $tableName = "layout_$layout";
             if(!Schema::hasTable($tableName) and count($fields)>0) $this->createTable($tableName,"layout", $fields);
@@ -105,7 +104,7 @@ class Migration {
                 if($type !== "single"){
                     $table->string('content_identifier');
                     if($type=="structural") $table->integer('order');
-                    if($type=="channel") $table->timestamp('publish_date')->default(DB::raw('CURRENT_TIMESTAMP(0)'));
+                    if($type=="channel") $table->timestamp('publish_date')->default(DB::raw('CURRENT_TIMESTAMP'));
                 }
             }
             $table->boolean('active')->default(0);
