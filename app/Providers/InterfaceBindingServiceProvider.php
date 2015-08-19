@@ -8,7 +8,7 @@
 namespace App\Providers;
 
 
-use App\Content;
+use App\Services\Content;
 use App\Contracts\Repositories\ContentInterface;
 use App\Contracts\Repositories\LanguageInterface;
 use App\Contracts\Repositories\MediaInterface;
@@ -36,7 +36,7 @@ class InterfaceBindingServiceProvider extends ServiceProvider{
     public function register()
     {
         $this->app->bind(PageInterface::class, Page::class);
-        $this->app->bind(ContentInterface::class, Content::class);
+        $this->app->bind(ContentInterface::class,Content::class);
         $this->app->bind(MediaInterface::class, Media::class);
         $this->app->bind(LanguageInterface::class, Language::class);
         $this->app->bind(SettingInterface::class, Setting::class);

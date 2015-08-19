@@ -4,8 +4,9 @@
     <div class="container-fluid">
         <div class="row">
             @include('back.partials.message',array('messageType'=>'alert-danger'))
+
             <div class="col-md-10 col-md-offset-1">
-                {{Form::open(array('route'=>array('admin.contents.store',$pageId,$layoutType), 'files'=>true))}}
+                {!! Form::open(array('route'=>array('admin.contents.store',$pageId), 'files'=>true)) !!}
                 <div class="panel panel-default">
                     <div class="panel-heading"> Channel Contents </div>
                     <div class="panel-body">
@@ -29,14 +30,10 @@
                                             </ul>
                                             <div class="tab-content">
                                                 @foreach($activeLanguages as $language)
-                                                        <div role="tabpanel" class="tab-pane {{$language->id == $defaultLanguage->id ? 'active':''}}" id="{{$language->code}}">
-                                                            <br />
-                                                            @foreach($fields['layout-content'] as $index => $field)
-                                                                @if(preg_match('/^meta_/i', $field))
-                                                                    @include("contents.formElements.{$fields['content-type'][$index]}",array(compact('language','field')))
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
+                                                    <div role="tabpanel" class="tab-pane {{$language->id == $defaultLanguage->id ? 'active':''}}" id="{{$language->code}}">
+                                                        <br />
+                                                        @include("contents.partials.metaForm",array(compact('language','field')))
+                                                    </div>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -65,16 +62,16 @@
                                             </ul>
                                             <div class="tab-content">
                                                 @foreach($activeLanguages as $language)
-                                                            <div role="tabpanel" class="tab-pane {{$language->id == $defaultLanguage->id ? 'active':''}}" id="content-{{$language->code}}">
-                                                                <br />
-                                                                @foreach($fields['layout-content'] as $index => $field)
-                                                                    @if(!preg_match('/^meta_/i', $field))
-                                                                        @include("contents.formElements.{$fields['content-type'][$index]}")
-                                                                    @endif
-                                                                @endforeach
-                                                                @include("contents.formElements.active")
-                                                                {{ Form::text("lang_id[]",$language->id,array("class"=>"hidden")) }}
-                                                            </div>
+                                                    <div role="tabpanel" class="tab-pane {{$language->id == $defaultLanguage->id ? 'active':''}}" id="content-{{$language->code}}">
+                                                        <br />
+                                                        @foreach($fields as $index => $field)
+                                                            @if(!preg_match('/^meta_/i', $field))
+                                                                @include("contents.formElements.{$field->type}")
+                                                            @endif
+                                                        @endforeach
+                                                        @include("contents.formElements.active")
+                                                        {!!  Form::text("lang_id[]",$language->id,array("class"=>"hidden")) !!}
+                                                    </div>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -86,11 +83,19 @@
                     </div>
                     <div class="panel-footer">
                         <input type="submit" class="btn btn-success btn-block" value="Update Content">
-                        <a class="btn btn-info btn-block" href="{{route("admin.pages.content",array($pageId,$layoutType))}}">Back</a>
+                        <a class="btn btn-info btn-block" href="{{route("admin.pages.contents",array($pageId))}}">Back</a>
                     </div>
                 </div>
-                {{Form::close()}}
+                {!! Form::close() !!}
             </div>
+
+
+
+
         </div>
     </div>
+    @include("contents.partials.mediaLibaryModal")
+@endsection
+
+@section('scripts')
 @endsection

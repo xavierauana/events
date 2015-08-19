@@ -4,7 +4,6 @@ namespace App;
 
 use App\Contracts\Repositories\LanguageInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
 
 class Language extends Model implements LanguageInterface
 {
@@ -21,7 +20,7 @@ class Language extends Model implements LanguageInterface
     public function getDefaultLanguage()
     {
         $object = $this;
-        $language = Cache::rememberForever('default_language', function()use($object){
+        $language = cache()->rememberForever('default_language', function()use($object){
             return  $object->whereDefault(1)->first();
         });
         return $language;

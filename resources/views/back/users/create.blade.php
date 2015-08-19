@@ -12,19 +12,12 @@
                     <div class="panel-heading">Create A new User</div>
                     <div class="panel-body">
                         @include('back.users.partials.error')
-                        {{ Form::open(array('route'=>array('admin.users.store'), "role"=>"form", 'method'=>'POST', 'class'=>'form-horizontal')) }}
+                        {!! Form::open(array('route'=>array('admin.users.store'), "role"=>"form", 'method'=>'POST', 'class'=>'form-horizontal')) !!}
                             @include('back.users.partials.form',array('submitButtonText'=>'Create New User'))
-                        {{ Form::close() }}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-    <script type="text/javascript">
-        $('select').select2();
-    </script>
 @endsection

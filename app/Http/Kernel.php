@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Xavierau\RoleBaseAuthentication\Middleware\PermissionMiddleware;
+use Xavierau\RoleBaseAuthentication\Middleware\RoleMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -29,5 +31,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'hasRole' => RoleMiddleware::class,
+        'canDo' => PermissionMiddleware::class,
     ];
 }

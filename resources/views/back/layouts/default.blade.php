@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{{elixir("back/css/back.css")}}">
+    <link rel="stylesheet" href="{{elixir("back/css/app.css")}}">
     @yield('stylesheets')
     <style>
         .navbar-default {
@@ -53,8 +54,6 @@
         <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/components/jquery/dist/jquery.min.js"><\/script>')</script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script>if(typeof($.fn.modal) === 'undefined'){document.write('<script src="/components/bootstrap/dist/js/bootstrap.min.js"><\/script>')}</script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
 

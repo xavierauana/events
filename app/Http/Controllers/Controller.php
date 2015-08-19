@@ -13,15 +13,6 @@ abstract class Controller extends BaseController
     use DispatchesJobs, ValidatesRequests;
 
     /**
-     * @param \Acme\Contracts\Repositories\LanguageInterface $
-     */
-    function __construct()
-    {
-        View::share('activeLanguages', Cache::get('active_languages'));
-        View::share('defaultLanguage', Cache::get('default_language'));
-    }
-
-    /**
      * @return mixed
      */
     protected function redirectWithInputsAndErrors()

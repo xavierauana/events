@@ -34,6 +34,14 @@ class DeveloperController extends Controller
         return redirect()->route('dev.index')->withMessage('Content tables have been refreshed.');
     }
 
+    public function refreshTheLayoutTable(Request $request)
+    {
+        $table = $request->get("layout");
+        $this->layout->dropLayoutTable($table);
+        $this->layout->createALayoutTable($table);
+        return redirect()->route('dev.index')->withMessage($table.' tables have been refreshed.');
+    }
+
     public function cacheRefreshAll()
     {
         event(new RefreshCache('page', 'create'));

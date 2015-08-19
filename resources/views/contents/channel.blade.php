@@ -8,23 +8,23 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Channel Pages <a class="btn btn-xs btn-success pull-right"  href="{{route('admin.contents.create',array($pageId,$layoutType))}}">Create New Content</a></div>
                     <div class="panel-body">
-                        <table class="table">
+                        <table class="table sortableTable">
                             <thead>
                             <th>content id</th>
                             <th></th>
                             </thead>
                             <tbody>
-                            @foreach($channel as $content)
+                            @foreach($contents as $content)
                                 <tr>
-                                    <td>{{$content}}</td>
+                                    <td>{{$content->content_identifier}}</td>
 
                                     {{--The following is the action apply to the record--}}
                                     <td>
                                         <div class="btn-group btn-group-sm" role="group">
-                                            <a type="button" class="btn btn-info" href="{{route('admin.contents.edit', array($pageId, $layoutType, $content))}}">
+                                            <a type="button" class="btn btn-info" href="{{route('admin.contents.edit', array($pageId, $content->content_identifier))}}">
                                                 <i class="fa fa-pencil-square-o"></i> edit
                                             </a>
-                                            <a type="button" class="btn btn-danger" data-id="{{$content}}"  onclick="deleteEntry(this)">
+                                            <a type="button" class="btn btn-danger" data-id="{{$content->content_identifier}}"  onclick="deleteEntry(this)">
                                                 <i class="fa fa-times-circle-o"></i> delete
                                             </a>
                                         </div>
@@ -45,13 +45,9 @@
         function deleteEntry(target)
         {
             var pageId = "{{$pageId}}";
-            var layoutType = "{{$layoutType}}";
-            console.log(pageId);
-            console.log(target);
-            console.log(layoutType);
             $(target).deleteItem({
                 pageId: pageId,
-                layoutType: layoutType
+                url: "content"
             })
         }
     </script>

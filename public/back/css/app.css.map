@@ -1,0 +1,1 @@
+{"version":3,"sources":["mediaLibary.less","back.css"],"names":[],"mappings":"AAAA;EAEI,yBAAA;ECAH;ADFD;EAKI,wBAAA;ECAH","file":"app.css","sourcesContent":["#mediaLibrary{\n  .img-container{\n    border:white solid 2px;\n  }\n  .img-container.selected{\n    border:blue solid 2px;\n  }\n}",null],"sourceRoot":"/source/"}

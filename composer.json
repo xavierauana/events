@@ -17,6 +17,13 @@
         "phpspec/phpspec": "~2.1"
     },
     "autoload": {
+        "files": [
+            "app/Helpers/cache.php",
+            "app/Helpers/contentfields.php",
+            "app/Helpers/setting.php",
+            "app/Helpers/dateTime.php",
+            "app/Helpers/googleMap.php"
+        ],
         "classmap": [
             "database"
         ],

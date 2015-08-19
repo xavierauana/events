@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Repositories\PageInterface;
 use App\Entities\Layout;
 use App\Events\RefreshCache;
+use App\Template;
 use App\Validators\PageValidator;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,10 @@ class PagesController extends Controller
     private $baseRoute = 'admin.pages.';
     private $basePage = 'back.pages.';
     private $page;
+    /**
+     * @var \App\Template
+     */
+    private $template;
 
     /**
      * Validator for form inputs
@@ -25,10 +30,11 @@ class PagesController extends Controller
      * @param \App\Validators\PageValidator             $validator
      * @param \App\Contracts\Repositories\PageInterface $page
      */
-    function __construct(PageValidator $validator, PageInterface $page)
+    function __construct(PageValidator $validator, PageInterface $page, Template $template)
     {
         $this->validator = $validator;
         $this->page = $page;
+        $this->template = $template;
     }
 
 
@@ -50,10 +56,7 @@ class PagesController extends Controller
      */
     public function create()
     {
-        $layout = new Layout();
-        $layouts = $layout->getAllLayouts();
-        $message='Page created.';
-        return view($this->basePage.'create', compact('layouts'))->withMessage($message);
+        return view($this->basePage.'create');
     }
 
     /**
@@ -98,10 +101,8 @@ class PagesController extends Controller
      */
     public function edit($id)
     {
-        $layout = new Layout();
-        $layouts = $layout->getAllLayouts();
         $page = $this->page->findOrFail($id);
-        return view($this->basePage.'edit', compact('page','layouts'));
+        return view($this->basePage.'edit', compact('page'));
     }
 
     /**
@@ -115,15 +116,15 @@ class PagesController extends Controller
         $data = $request->all();
         $checking = $data;
         $checking['pageId'] = $id;
-        if($this->validator->validate($checking,__FUNCTION__))
-        {
-            $page = $this->page->findOrFail($id);
-            $page->update($data);
-            event(new RefreshCache("page", "update"));
-            $message = 'Page Updated.';
-            return redirect()->route($this->baseRoute.'index')->withMessage($message);
-        }
-        return $this->redirectWithInputsAndErrors();
+        $rules = $this->validator->getUpdateRules($id);
+        $this->validate($request, $rules);
+
+        $page = $this->page->findOrFail($id);
+        $page->update($data);
+        event(new RefreshCache("page", "update"));
+        $message = 'Page Updated.';
+        return redirect()->route($this->baseRoute.'index')->withMessage($message);
+
     }
 
     /**

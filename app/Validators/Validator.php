@@ -43,8 +43,5 @@ abstract class Validator {
         return $this->getBasicRules();
     }
 
-
-    abstract function getBasicRules();
-    abstract function getStoreRules();
-    abstract function getUpdateRules($id=null);
+    public abstract function getBasicRules();
 }

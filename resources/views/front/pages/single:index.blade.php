@@ -6,10 +6,6 @@
     <meta name="author" content="Xavier Au">
 @endsection
 
-@section('stylesheets')
-    <link rel="stylesheet" href="/front/css/month.css" />
-@endsection
-
 @section('title') Events @endsection
 
 @section('content')
@@ -78,17 +74,17 @@
         </div>
 
         {{--The following is the events block move right--}}
-        <div class="col-md-4 col-xs-6 carouselContainer" v-repeat="blocks">
+        <div class="col-md-4 col-xs-6 carouselContainer" index="@{{ $index }}" v-repeat="events">
             <div id="date-@{{ $index }}" class="carousel slide blocks @{{ class }} " data-interval="false" data-ride="carousel">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
-                    <div v-class="item:true, active: $index==0" v-repeat="events">
+                    <div v-class="item:true, active: $index==0" v-repeat="items">
                         <div class="col-xs-7 imgContainer">
-                            <img src="@{{ image }}" width="100%" alt="Chania">
+                            <img src="@{{ image1 }}"  alt="Chania">
                         </div>
                         <div class="col-xs-5 carousel-caption">
-                            <p>@{{ description }}</p>
-                            <a href="/events/detail/@{{ id }}" class="link_detail">More <i class="fa fa-chevron-right"></i></a>
+                            <p>@{{ summary }}</p>
+                            <a href="/{{config("app.locale")}}/events/@{{ content_identifier }}" class="link_detail">More <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                     <!-- Left and right controls -->
@@ -101,13 +97,79 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-
             </div>
         </div>
     </div>
 
+    <div class="modal fade screen-centered" id="ajaxLoading">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="text-center" style="margin-top: 20px"><i class="fa fa-spinner fa-pulse fa-2x text-center"></i></p>
+                    <p class="text-center">Loading...</p>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 @endsection
 
 @section('scripts')
-    <script src="/js/monthBundle.js"></script>
+    <script>
+        var indexVue = new Vue({
+            el: "#vue",
+            methods:{
+                changeMonth:function(delta){
+                    this.currentMonth = moment().month(this.currentMonth).add(parseInt(delta), "M").format("MMMM").toUpperCase();
+                    this.fetchEvents();
+                },
+                fetchEvents:function(){
+                    var queryCol, monthQueryString;
+                    monthQueryString =  moment().month(this.currentMonth).format("YYYY-MM-");
+                    queryCol = "eventStartDate";
+                    $("#ajaxLoading").modal('show');
+var t0 = performance.now();
+                    this.$http.get('/api/search?page=events&'+queryCol+'='+monthQueryString, function (data, status, request) {
+var t1 = performance.now();
+                        var groupByDate, dateWithEvents, vueEventArray, testingI, theClass;
+                        groupByDate=[];
+                        for (var i =1; i<=31 ; i++){
+                            groupByDate[i] = data.result.filter(function(event){
+                                var date;
+                                date = moment(event[queryCol]).format("D")-1;
+                                return date == i;
+                            })
+                        }
+
+                        var removeDateWithNoEvents = function(date){
+                            return date.length != 0
+                        };
+                        dateWithEvents = groupByDate.filter(removeDateWithNoEvents);
+                        testingI=0;
+                        theClass = "right";
+                        vueEventArray = dateWithEvents.map(function(date){
+                            if(testingI%3 == 0 && testingI >0){
+                                theClass == "right"? theClass="left": theClass="right"
+                            }
+                            testingI++;
+                            return {
+                                class: theClass,
+                                items: date
+                            }
+                        });
+                        $("#ajaxLoading").modal('hide');
+                        this.$set('events', vueEventArray);
+var t2 =  performance.now();
+
+console.log(t1-t0, t2-t1);
+                    });
+                }
+            },
+            ready:function(){
+                this.$set("currentMonth", moment().format("MMMM").toUpperCase());
+                this.fetchEvents();
+            }
+        })
+    </script>
 @endsection

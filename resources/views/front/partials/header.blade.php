@@ -8,7 +8,7 @@
         </div>
         <ul class="list-inline pull-right" style="margin-right:15px ">
             @if(Auth::user())
-                <li><a href="{{route("admin.profile")}}">{{Auth::user()->name}}</a></li>
+                <li><a href="{{route("admin.user.profile")}}">{{Auth::user()->name}}</a></li>
             @else
                 <li><a href="/auth/register">註冊</a></li>
                 <li><a href="/auth/login">登錄</a></li>

@@ -19,6 +19,8 @@ class ParsingContentFile {
         'file'=>'string',
         'image'=>'string',
         'video'=>'string',
+        'datetime'=>'timestamp',
+        'richtext'=>'text',
         'checkbox'=>'boolean'
     );
 
@@ -166,5 +168,10 @@ class ParsingContentFile {
         $layoutType = strtolower($layoutType);
         $fullLayoutName = $layoutType.':'.$name.'.blade.php';
         return $fullLayoutName;
+    }
+
+    public function getLayoutTableName($layoutName)
+    {
+        return "layout_".strtolower($this->getLayoutNameOnly($layoutName));
     }
 }

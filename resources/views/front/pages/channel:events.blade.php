@@ -1,9 +1,7 @@
 @extends('front.layouts.default')
 
 @section('meta')
-    <meta name="description" content="Events">
-    <meta name="keywords" content="Hong Kongs,Events,July">
-    <meta name="author" content="Xavier Au">
+    <meta name="description" content="{{$content->meta_description}}">
 @endsection
 
 @section('stylesheets')
@@ -97,7 +95,7 @@
     </style>
 @endsection
 
-@section('title') Events @endsection
+@section('title') {{$content->meta_title}} @endsection
 
 @section('content')
     {{-- The contain the carosuel --}}
@@ -114,16 +112,16 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="http://lorempixel.com/900/500/animals/" width="100%" alt="...">
+                    <img src="{{$content->image1}}" width="100%" alt="...">
                 </div>
                 <div class="item ">
-                    <img src="http://lorempixel.com/900/500/city/" width="100%" alt="...">
+                    <img src="{{$content->image2}}" width="100%" alt="...">
                 </div>
                 <div class="item ">
-                    <img src="http://lorempixel.com/900/500/sports/" width="100%" alt="...">
+                    <img src="{{$content->image3}}" width="100%" alt="...">
                 </div>
                 <div class="item ">
-                    <img src="http://lorempixel.com/900/500/nature/" width="100%" alt="...">
+                    <img src="{{$content->image4}}" width="100%" alt="...">
                 </div>
 
             </div>
@@ -143,15 +141,8 @@
     {{-- Contain event blocks --}}
     <div class="container" style="padding-top:0" id="vue">
         <div class="col-md-9">
-            <div class="info">
-                <h5>this is the suject of the event</h5>
-                <h5>Here is the time</h5>
-                <h5>and address</h5>
-            </div>
-            <div class="details">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda beatae consequuntur deleniti dicta dolorem doloremque et eum excepturi fugiat harum in ipsam maiores mollitia necessitatibus, nesciunt obcaecati odit praesentium quis quos rem temporibus ut vero! Aliquid dignissimos non quasi saepe? At, enim, incidunt libero maiores nobis officiis optio provident quae quas, quidem quo rem reprehenderit sunt velit voluptas voluptatem voluptates. Animi at consequuntur, cumque deserunt est expedita explicabo harum ipsum iure nihil perferendis quaerat quisquam repudiandae sunt ut! Alias fugit nemo possimus quae, ratione unde? Accusamus aspernatur assumenda cum cupiditate delectus doloribus dolorum ex exercitationem explicabo facere laboriosam laborum mollitia, nesciunt nobis, officiis praesentium quas quos reiciendis repellat, totam ut velit voluptas! Cupiditate, dolor est natus quas reprehenderit rerum. Adipisci architecto aut blanditiis corporis deleniti eaque eius error eum ex expedita facere facilis, fugit inventore minus molestias odio placeat praesentium provident quam, quia quo ratione rem rerum sequi, tempore ullam voluptatem voluptatum. A ab ad aliquid aperiam at commodi corporis dicta dignissimos dolore doloremque error est eveniet exercitationem fuga fugiat id iure iusto laboriosam maiores molestiae nesciunt odio omnis quas qui, quibusdam ratione, rem repellat repudiandae rerum unde vel velit voluptate voluptatibus? Ab animi consequatur deserunt itaque sunt unde voluptatem!
-                </p>
+            <div class="details" >
+                {!! $content->detail !!}
             </div>
             <div class="social_link">
                 <ul class="list-inline">
@@ -181,11 +172,14 @@
             <div id="calendar">
 
             </div>
-
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d236150.34378618016!2d114.14086859999999!3d22.359325149999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403fefda2ea2807%3A0x486db43574f494da!2sHong+Kong!5e0!3m2!1sen!2shk!4v1434450934123" width="100%" height="250" frameborder="0" style="border:0"></iframe>
+            <span class="sr-only" layout-content="address" content-type="string">Address</span>
+            <iframe width="100%" height="250" frameborder="0" style="border:0"
+                    src="{{embedMapLink($content->address)}}" allowfullscreen style="border:0"></iframe>
 
             <div class="remark">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, cum cumque dolor enim eos ex facere impedit magnam maxime minus nam nihil perferendis praesentium quam quas sequi tenetur vel voluptas!</p>
+                <p>
+                    {{$content->summary}}
+                </p>
             </div>
 
             <div class="links hidden-md hidden-lg">
@@ -196,8 +190,9 @@
         </div>
     </div>
 
-
-    <script type="text/template" id="calTemplate">
+<span class="sr-only" layout-content="event_start_date" content-type="datetime">Event Start Date</span>
+<span class="sr-only" layout-content="event_end_date" content-type="datetime">Event End Date</span>
+    <script type="text/template" id="calTemplate" >
         <div class="clndr-controls">
             <div class="month"><%= month.toUpperCase() %></div>
         </div>
@@ -216,7 +211,7 @@
 
 @section('scripts')
     <script>
-        var eventDate = "2015-12-22";
+        var eventDate = "{{convertDateTime($content->eventStartDate)}}";
         $('#calendar').clndr({
             template: document.querySelector("#calTemplate").innerHTML,
             startWithMonth: moment(eventDate,"YYYY-MM-DD"),

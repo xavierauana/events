@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 @include('back.partials.message')
-                {!! Form::open(array('route'=>array('admin.contents.store',$pageId,$layoutType), 'files'=>true)) !!}
+                {!! Form::open(array('route'=>array('admin.contents.store',$pageId,$layoutType), 'files'=>true, "method"=>"POST")) !!}
                 <div class="panel panel-default">
                     <div class="panel-heading">Contents </div>
                     <div class="panel-body">
@@ -33,10 +33,8 @@
                                                         @if($language->id == $content->lang_id)
                                                             <div role="tabpanel" class="tab-pane {{$language->id == $defaultLanguage->id ? 'active':''}}" id="{{$language->code}}">
                                                                 <br />
-                                                                @foreach($fields['layout-content'] as $index => $field)
-                                                                    @if(preg_match('/^meta_/i', $field))
-                                                                        @include("contents.formElements.{$fields['content-type'][$index]}",array(compact('language','field')))
-                                                                    @endif
+                                                                @foreach($fields as  $field)
+                                                                    @include("contents.partials.metaForm",[compact('language','field')])
                                                                 @endforeach
                                                             </div>
                                                         @endif
@@ -71,14 +69,13 @@
                                                         @if($language->id == $content->lang_id)
                                                             <div role="tabpanel" class="tab-pane {{$language->id == $defaultLanguage->id ? 'active':''}}" id="content-{{$language->code}}">
                                                                 <br />
-                                                                @foreach($fields['layout-content'] as $index => $field)
-                                                                    @if(!preg_match('/^meta_/i', $field))
-                                                                        @include("contents.formElements.{$fields['content-type'][$index]}")
-                                                                    @endif
+                                                                @foreach($fields as $index => $field)
+                                                                    {{--@if(!preg_match('/^meta_/i', $field))--}}
+                                                                        @include("contents.formElements.{$field->type}")
+                                                                    {{--@endif--}}
                                                                 @endforeach
                                                                 @include("contents.formElements.active")
                                                                 {!! Form::text("content_id[]",$content->id,array("class"=>"hidden")) !!}
-                                                                {!! Form::text("lang_id[]",$language->id,array("class"=>"hidden")) !!}
                                                             </div>
                                                         @endif
                                                     @endforeach
@@ -100,4 +97,5 @@
             </div>
         </div>
     </div>
+    @include("contents.partials.mediaLibaryModal")
 @endsection

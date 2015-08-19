@@ -8,7 +8,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Pages <a class="btn btn-xs btn-success pull-right"  href="{{route('admin.pages.create')}}">Create New Page</a></div>
                     <div class="panel-body">
-                        <table class="table">
+                        <table class="table sortableTable">
                             <thead>
                                 <th>url</th>
                                 <th class="hidden-xs">status</th>
@@ -20,10 +20,10 @@
                                     <tr data-id="{{$page->id}}">
                                         <td class="{{$page->active ? "text-primary":"text-danger"}}">{{$page->url}}</td>
                                         <td class="hidden-xs {{$page->active ? "text-primary":"text-danger"}}">{{$page->active ? 'Active' : 'Not Active'}}</td>
-                                        <td>{{$page->layout->displayName}}</td>
+                                        <td>{{$page->template->display}}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group">
-                                                <a type="button" class="btn btn-primary" href="{{url('admin/contents',array($page->id,$page->layout->type))}}">
+                                                <a type="button" class="btn btn-primary" href="{{route("admin.pages.contents", $page->id)}}">
                                                     <i class="fa fa-file-text-o"></i> content
                                                 </a>
                                                 <a type="button" class="btn btn-info" href="{{route('admin.pages.edit', $page->id)}}">
@@ -53,6 +53,5 @@
                 url: 'pages'
             });
         }
-        $('.table').DataTable();
     </script>
 @endsection

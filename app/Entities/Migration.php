@@ -7,6 +7,8 @@
 
 namespace App\Entities;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
@@ -48,16 +50,32 @@ class Migration {
      */
     public function createLayoutTables($contentFields)
     {
+        dd($contentFields);
         foreach ($contentFields as $layout => $fields) {
             $tableName = "layout_$layout";
-            if(!Schema::hasTable($tableName) and count($fields)>0) $this->createTable($tableName, $fields);
+            if(!Schema::hasTable($tableName) and count($fields)>0) $this->createTable($tableName,"layout", $fields);
         }
     }
     public function createPartialTables($partialContentFields)
     {
         foreach ($partialContentFields as $layout => $fields) {
             $tableName = "partial_$layout";
-            if(!Schema::hasTable($tableName) and count($fields)>0) $this->createTable($tableName, $fields);
+            if(!Schema::hasTable($tableName) and count($fields)>0) $this->createTable($tableName,"partial", $fields);
+        }
+    }
+    public function createLayoutTablesOnly($layouts)
+    {
+        foreach ($layouts as $layout) {
+            $tableName = "layout_".strtolower($layout->display);
+            $type = $layout->type;
+            if(!Schema::hasTable($tableName)) $this->createTable($tableName, $type);
+        }
+    }
+    public function createPartialTablesOnly($partials)
+    {
+        foreach ($partials as $partial) {
+            $tableName = "partial_".strtolower($partial->display);
+            if(!Schema::hasTable($tableName)) $this->createTable($tableName, "partial");
         }
     }
 
@@ -70,26 +88,103 @@ class Migration {
         Schema::dropIfExists("partial_$partial");
     }
 
-    private function createTable($tableName, $fields)
+    private function createTable($tableName, $type, $fields=null)
     {
-        $type = substr($tableName,0, strpos($tableName, '_'));
-        Schema::create($tableName, function ($table) use ($fields, $type) {
-            $fieldNames = $fields['layout-content'];
-            $fieldTypes = $fields['content-type'];
-            $table->increments('id');
 
+        Schema::create($tableName, function ($table)use($type) {
+            $table->increments('id');
             $table->integer('lang_id')->unsigned();
             $table->foreign('lang_id')->references('id')->on('languages')->onDelete('cascade');
-            if($type == 'layout')
+            if($type <> 'partial')
             {
+                $table->string('meta_title')->nullable();
+                $table->text('meta_description')->nullable();
                 $table->integer('page_id')->unsigned();
                 $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
+
+                if($type !== "single"){
+                    $table->string('content_identifier');
+                    if($type=="structural") $table->integer('order');
+                    if($type=="channel") $table->timestamp('publish_date')->default(DB::raw('CURRENT_TIMESTAMP(0)'));
+                }
             }
-            foreach ($fieldNames as $index => $fieldName) {
-                $table->$fieldTypes[$index]($fieldName);
-            }
-            $table->boolean('active');
+            $table->boolean('active')->default(0);
             $table->timestamps();
         });
+
+        if($fields){
+            $this->addTableColumns($tableName, $fields);
+        }
+
+    }
+
+    /**
+     * @param $tableName
+     * @param $fields
+     */
+    private function addTableColumns($tableName, $columns)
+    {
+        Schema::table($tableName, function ($table) use ($columns) {
+            $fieldNames = $columns['layout-content'];
+            $fieldTypes = $columns['content-type'];
+            foreach ($fieldNames as $index => $fieldName) {
+                $table->$fieldTypes[$index]($fieldName)->nullable();
+            }
+        });
+    }
+
+    public function addColumns($tableName, $columns)
+    {
+        if($columns instanceof Collection){
+            foreach ($columns as $column) {
+                if ( ! Schema::hasColumn($tableName, $column)) {
+                    Schema::table($tableName, function ($table) use ($column) {
+                        $columnType = convertInputTypeToDbType($column->type);
+                        $columnName = $column->code;
+                        $table->$columnType($columnName)->nullable();
+                    });
+                }
+            }
+        }
+        if(is_array($columns)){
+            foreach ($columns as $column) {
+                if ( ! Schema::hasColumn($tableName, $column['code'])) {
+                    Schema::table($tableName, function ($table) use ($column) {
+                        $columnType = convertInputTypeToDbType($column["type"]);
+                        $columnName = $column["code"];
+                        $table->$columnType($columnName)->nullable();
+                    });
+                }
+            }
+        }
+    }
+
+    public function dropColums($tableName, $columns)
+    {
+        $tempColumns = [];
+
+        if( $columns instanceof Collection){
+            foreach($columns as $column){
+                $tempColumns[] = $column->code;
+            }
+        }
+
+        if(is_array($columns))
+        {
+            foreach($columns as $column){
+                $tempColumns[] = $column["code"];
+            }
+        }
+
+        foreach($tempColumns as $targetColumn){
+            if (Schema::hasColumn($tableName, $targetColumn)) {
+                Schema::table($tableName, function ($table)use($targetColumn) {
+                    $table->dropColumn($targetColumn);
+                });
+            }
+        }
+
+
+
     }
 }

@@ -65,15 +65,22 @@ class getContents {
      */
     private function createRecords()
     {
-        $languages = Cache::get('active_languages');
+        $languages = cache('active_languages');
         foreach ($languages as $language) {
-            $test = $this->content->wherePageId($this->page->id)->whereLangId($language->id)->get();
-            dd($test);
-            if(count($test) == 0){
-                $this->content->lang_id = $language->id;
-                $this->content->page_id = $this->page->id;
-                $this->content->save();
-            }
+            $this->CreateWhenRecordNotFound($language);
+        }
+    }
+
+    /**
+     * @param $language
+     */
+    private function CreateWhenRecordNotFound($language)
+    {
+        $test = $this->content->wherePageId($this->page->id)->whereLangId($language->id)->get();
+        if (count($test) == 0) {
+            $this->content->lang_id = $language->id;
+            $this->content->page_id = $this->page->id;
+            $this->content->save();
         }
     }
 }

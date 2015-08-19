@@ -13,19 +13,12 @@
                     <div class="panel-body">
                         @include('back.users.partials.error')
 
-                        {{ Form::model($user, array('route'=>array('admin.users.update', $user->id), "role"=>"form", 'method'=>'PATCH', 'class'=>'form-horizontal')) }}
+                        {!!  Form::model($user, array('route'=>array('admin.users.update', $user->id), "role"=>"form", 'method'=>'PATCH', 'class'=>'form-horizontal')) !!}
                             @include('back.users.partials.form',array('submitButtonText'=>'Update User'))
-                        {{ Form::close() }}
+                        {!!  Form::close() !!}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-    <script type="text/javascript">
-        $('select').select2();
-    </script>
 @endsection

@@ -15,8 +15,9 @@ class CreatePagesTable extends Migration {
 		Schema::create('pages', function(Blueprint $table) {
 			$table->increments('id');
             $table->string('url');
-            $table->string('layout');
-            $table->boolean('active');
+            $table->integer('template_id')->unsigned();
+			$table->foreign('template_id')->references('id')->on('templates')->onDelete('cascade');
+			$table->boolean('active');
 			$table->timestamps();
 		});
 	}

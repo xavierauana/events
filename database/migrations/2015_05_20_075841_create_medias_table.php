@@ -12,11 +12,14 @@ class CreateMediasTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('medias', function(Blueprint $table) {
+		Schema::create('media', function(Blueprint $table) {
 			$table->increments('id');
+			$table->string('path');
 			$table->string('link');
-			$table->string('name');
+			$table->string('fileName');
 			$table->string('type');
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}
@@ -29,7 +32,7 @@ class CreateMediasTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('medias');
+		Schema::drop('media');
 	}
 
 }

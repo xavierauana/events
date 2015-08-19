@@ -1,3 +1,5 @@
+
+@inject("content", "")
 @extends('front.layouts.default')
 
 @section('meta')
@@ -116,15 +118,11 @@
     {{-- Contain event blocks --}}
     <div class="container" style="padding-top:0" id="vue">
         <div class="col-md-9">
-            <div class="info">
-                <h5>this is the suject of the event</h5>
-                <h5>Here is the time</h5>
-                <h5>and address</h5>
+            <div class="info" layout-content="info" content-type="text">
+                {{$content->info}}
             </div>
-            <div class="details">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda beatae consequuntur deleniti dicta dolorem doloremque et eum excepturi fugiat harum in ipsam maiores mollitia necessitatibus, nesciunt obcaecati odit praesentium quis quos rem temporibus ut vero! Aliquid dignissimos non quasi saepe? At, enim, incidunt libero maiores nobis officiis optio provident quae quas, quidem quo rem reprehenderit sunt velit voluptas voluptatem voluptates. Animi at consequuntur, cumque deserunt est expedita explicabo harum ipsum iure nihil perferendis quaerat quisquam repudiandae sunt ut! Alias fugit nemo possimus quae, ratione unde? Accusamus aspernatur assumenda cum cupiditate delectus doloribus dolorum ex exercitationem explicabo facere laboriosam laborum mollitia, nesciunt nobis, officiis praesentium quas quos reiciendis repellat, totam ut velit voluptas! Cupiditate, dolor est natus quas reprehenderit rerum. Adipisci architecto aut blanditiis corporis deleniti eaque eius error eum ex expedita facere facilis, fugit inventore minus molestias odio placeat praesentium provident quam, quia quo ratione rem rerum sequi, tempore ullam voluptatem voluptatum. A ab ad aliquid aperiam at commodi corporis dicta dignissimos dolore doloremque error est eveniet exercitationem fuga fugiat id iure iusto laboriosam maiores molestiae nesciunt odio omnis quas qui, quibusdam ratione, rem repellat repudiandae rerum unde vel velit voluptate voluptatibus? Ab animi consequatur deserunt itaque sunt unde voluptatem!
-                </p>
+            <div class="details" layout-content="details" content-type="text">
+                {{$content->details}}
             </div>
             <div class="social_link">
                 <ul class="list-inline">
@@ -152,10 +150,10 @@
         </div>
         <div class="col-md-3">
             <img class="img-responsive" src="http://lorempixel.com/600/500/people/" alt="" />
-            <div class="writer_description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa cum distinctio illum, magnam minus nam nostrum omnis reiciendis tempora! Accusamus assumenda, dolores eligendi expedita facere id quis. Consequatur, odit, repellat?
+            <div class="writer_description" layout-content="writer_description" content-type="text">
+                {{$content->writer_description}}
             </div>
-            <a href="/writer/1" class="writer_profile">MORE</a>
+            <a href="/writer/{{$content->id}}" class="writer_profile">MORE</a>
         </div>
     </div>
 

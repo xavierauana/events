@@ -1,3 +1,4 @@
+@inject("layouts", "App\Entities\Layout")
 @extends('back.layouts.default')
 
 @section('content')
@@ -25,8 +26,17 @@
                                     <a class="btn btn-danger" href="{{route('refreshAllLayoutsAndContents')}}">Go!</a>
                                 </td>
                             </tr>
+                            <tr>
+                                {!!  Form::open(["route"=>"refreshTheLayout", "method"=>"POST"]) !!}
+                                <td>
+                                    {!!  Form::select("layout",$layouts->getAllLayouts(),null,array("class"=>"form-control")) !!}
+                                </td>
+                                <td>
+                                    {!!  Form::submit("Go!", array("class"=>"btn btn-danger")) !!}
+                                </td>
+                                {!!  Form::close() !!}
+                            </tr>
                             </tbody>
-
                         </table>
                     </div>
                 </div>

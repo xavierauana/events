@@ -5,7 +5,7 @@ $(function(){
     //Initialize CKEditor
 
     // replace all textarea with CKEditor
-    var targets = $("textarea");
+    var targets = $("textarea.editor");
     $.each(targets,function(i, val){
         var target = $(val);
         var id = target.attr('id');

@@ -18,30 +18,55 @@
                 </button>
             </div>
             <div class="collapse navbar-collapse" id="collapse-nav">
-                @if(Auth::user()->hasRole(["administrator","developer"]))
-                    <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/dashboar">Dashboard</a></li>
-                    <li><a href="{{route("admin.partials.index")}}">Common Information</a></li>
-                    <li><a href="{{route("admin.pages.index")}}">Pages</a></li>
-                    <li><a href="{{route("admin.menus.index")}}">Menus</a></li>
-                    <li><a href="{{route("admin.settings.index")}}">Settings</a></li>
-                    <li><a href="{{route("admin.languages.index")}}">Languages</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    @if(Auth::user()->hasRole(["administrator","developer"]))
+                        <li><a href="/dashboar">Dashboard</a></li>
+                        <li><a href="{{route("admin.partials.index")}}">Common Information</a></li>
+                        @if(Auth::user()->canDo("page","show"))
+                            <li><a href="{{route("admin.pages.index")}}">Pages</a></li>
+                        @endif
+                        @if(Auth::user()->canDo("menu", "show"))
+                            <li><a href="{{route("admin.menus.index")}}">Menus</a></li>
+                        @endif
+                        @if(Auth::user()->canDo("setting", "show"))
+                            <li><a href="{{route("admin.settings.index")}}">Settings</a></li>
+                        @endif
+                        @if(Auth::user()->canDo("language", "show"))
+                            <li><a href="{{route("admin.languages.index")}}">Languages</a></li>
+                        @endif
+                        @if(Auth::user()->canDo("template","show"))
+                            <li><a href="{{route("admin.templates.index")}}">Templates</a></li>
+                        @endif
+                        @if(Auth::user()->canDo("user", "show"))
+                        <li class="dropdown">
+                            <a aria-expanded="false" role="button" aria-haspopup="true" data-toggle="dropdown" class="dropdown-toggle" href="#" id="drop2">
+                                Authentication
+                                <span class="caret"></span>
+                            </a>
+                            <ul aria-labelledby="drop2" role="menu" class="dropdown-menu">
+                                <li role="presentation"><a href="{{route('admin.users.index')}}" tabindex="-1" role="menuitem">User</a></li>
+                                @if(Auth::user()->canDo("role","show"))
+                                    <li role="presentation"><a href="{{route('admin.authentication.roles.index')}}" tabindex="-1" role="menuitem">Role</a></li>
+                                @endif
+                                @if(Auth::user()->canDo("permission","show"))
+                                    <li role="presentation"><a href="{{route('admin.authentication.permissions.index')}}" tabindex="-1" role="menuitem">Permission</a></li>
+                                @endif
+                            </ul>
+                        </li>
+                        @endif
+                    @endif
                     <li class="dropdown">
                         <a aria-expanded="false" role="button" aria-haspopup="true" data-toggle="dropdown" class="dropdown-toggle" href="#" id="drop2">
-                            Authentication
+                            {{Auth::user()->name}}
                             <span class="caret"></span>
                         </a>
                         <ul aria-labelledby="drop2" role="menu" class="dropdown-menu">
-                            <li role="presentation"><a href="{{route('admin.authentication.users.index')}}" tabindex="-1" role="menuitem">User</a></li>
-                            <li role="presentation"><a href="{{route('admin.authentication.roles.index')}}" tabindex="-1" role="menuitem">Role</a></li>
-                            <li role="presentation"><a href="{{route('admin.authentication.permissions.index')}}" tabindex="-1" role="menuitem">Permission</a></li>
+                            <li role="presentation"><a href="{{route('admin.user.profile')}}" tabindex="-1" role="menuitem">My Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li role="presentation"><a href="{{url('/auth/logout')}}" tabindex="-1" role="menuitem">Logout</a></li>
                         </ul>
                     </li>
-                    @if(Auth::user()->hasRole('developer'))
-                        <li><a href="{{route("dev.index")}}">Layouts</a></li>
-                    @endif
                 </ul>
-                @endif
             </div>
         </div>
     </nav>

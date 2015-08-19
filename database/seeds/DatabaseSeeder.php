@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
         $this->call(LanguageTableSeeder::class);
         $this->call(PermissionTableSeeder::class);
         $this->call(RoleTableSeeder::class);
+        $this->call(SettingTableSeeder::class);
 
         (new Initializer())->initialize();
 

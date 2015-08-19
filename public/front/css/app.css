@@ -1,0 +1,253 @@
+.navbar-default {
+  border: 0;
+  background-color: #fdd204;
+  border-radius: 0;
+}
+.navbar-default li a {
+  color: #777777;
+}
+.navbar-default li li:hover {
+  color: #777777;
+}
+.navbar-default .navbar-toggle {
+  border: 0;
+}
+header ul a {
+  color: #777777;
+}
+footer ul a {
+  color: #777777;
+}
+#footer-social-links a {
+  color: #fdd204;
+}
+#footer-social-links a:hover {
+  color: #675601;
+}
+footer > .row div.col-xs-12:last-child {
+  border-right: solid black 2px;
+}
+#UpperCarousel {
+  /* Carousel */
+}
+#UpperCarousel .carousel-indicators {
+  left: 7%;
+  font-size: 2em;
+  line-height: 80px;
+}
+#UpperCarousel .carousel-indicators li,
+#UpperCarousel .carousel-indicators li.active {
+  height: 18px;
+  width: 18px;
+  border-color: #fdd204;
+}
+#UpperCarousel .carousel-indicators li.active {
+  background-color: #fdd204;
+}
+#UpperCarousel .carousel-caption {
+  font-size: 1.3em;
+  position: absolute;
+  right: 0;
+  padding: 20px;
+  margin: 0;
+  bottom: 0;
+  width: 30%;
+  left: auto;
+  height: 100%;
+  background-color: #484848;
+  color: white;
+}
+#UpperCarousel .carousel-caption a {
+  color: white;
+}
+#vue {
+  padding-top: 0;
+}
+#vue #catSelector {
+  margin-top: 20px;
+}
+#vue #displayMonth {
+  height: 300px;
+  background-color: #fdd204;
+}
+#vue #displayMonth p#currentMonth {
+  position: absolute;
+  bottom: 0;
+  font-size: 4em;
+  font-weight: 900;
+}
+#vue .page-title {
+  position: relative;
+  background-color: #fdd204;
+  width: 100%;
+  margin: 0;
+  height: 130px;
+  line-height: 130px;
+  font-size: 5.5em;
+  font-weight: 600;
+  text-align: right;
+  padding-right: 15px;
+  color: #231f20;
+}
+#vue .carouselContainer {
+  padding: 0;
+  max-height: 300px;
+  overflow: hidden;
+}
+#vue .carouselContainer .carousel-inner {
+  min-height: 100%;
+  overflow: hidden;
+  background-color: #fee469;
+}
+#vue .carouselContainer .carousel-inner .item {
+  max-height: 300px;
+  background-color: #fee469;
+}
+#vue .carouselContainer .carousel-inner .item.next {
+  background-color: #fee469;
+}
+#vue .carouselContainer .carousel-inner .item.active {
+  background-color: #fee469;
+}
+#vue .carouselContainer .carousel-inner .item .imgContainer {
+  margin: 0;
+  height: 250px;
+  padding: 0;
+}
+#vue .carouselContainer .carousel-inner .item .carousel-caption {
+  padding: 0;
+  padding-top: 15px;
+  margin-top: 0;
+  margin-bottom: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  top: 0;
+  height: 250px;
+  background-color: #fee469;
+}
+#vue .carouselContainer .carousel-inner .item .carousel-caption p {
+  padding: 0;
+  color: #000000;
+}
+#vue .carouselContainer .carousel-inner .item .link_detail {
+  position: absolute;
+  bottom: 5px;
+}
+#vue .carouselContainer .right .carousel-inner .item .carousel-caption {
+  right: 0;
+  left: auto;
+}
+#vue .carouselContainer .right .carousel-inner .item .link_detail {
+  right: 25%;
+}
+#vue .carouselContainer .left .carousel-inner .item .imgContainer {
+  float: right;
+}
+#vue .carouselContainer .left .carousel-inner .item .carousel-caption {
+  left: 0;
+  right: auto;
+}
+#vue .carouselContainer .left .carousel-inner .item .link_detail {
+  left: 10px;
+}
+#vue .carouselContainer .carousel-control {
+  width: 38px;
+  height: 300px;
+  background-color: rgba(253, 210, 4, 0.7);
+  background-image: none ;
+  opacity: 0;
+  transition-duration: 0.5s;
+}
+#vue .carouselContainer .carousel-control:hover {
+  opacity: 1;
+}
+#vue .carouselContainer .carousel-control .glyphicon {
+  color: #000000;
+  border: 0;
+}
+.event_block {
+  max-height: 300px;
+  background-color: greenyellow;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+}
+.event_block.right .img-container {
+  float: right;
+}
+.event_block.right a.more-button {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+.event_block.left .img-container {
+  float: left;
+  margin-right: 15px;
+}
+.event_block.left a.more-button {
+  position: absolute;
+  bottom: 10px;
+}
+div.img-container {
+  overflow: hidden;
+  padding: 0;
+}
+div.img-container img {
+  width: 100%;
+}
+div.description {
+  position: relative;
+  margin: 15px;
+  overflow: hidden;
+  height: 240px;
+}
+.control_button {
+  position: absolute;
+  min-height: 100%;
+  z-index: 1;
+  background: rgba(253, 210, 4, 0.7);
+  /* Safari */
+  transition: opacity 0.7s;
+  opacity: 0;
+}
+.control_button.small {
+  padding-top: 40%;
+  width: 10%;
+  font-size: 2em;
+  text-align: center;
+}
+.control_button.small i {
+  margin: auto 0;
+}
+.control_button:hover {
+  opacity: 1;
+}
+.control_button.left {
+  left: 0;
+}
+.control_button.right {
+  right: 0;
+}
+.container-fluid {
+  padding: 0 30px;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+.modal.screen-centered {
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  .modal.screen-centered:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+.modal.screen-centered .modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/*# sourceMappingURL=app.css.map */

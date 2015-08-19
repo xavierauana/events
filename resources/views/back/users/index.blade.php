@@ -8,7 +8,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Users <a class="btn btn-xs btn-success pull-right"  href="{{route('admin.users.create')}}">Create New User</a><a href="/admin/users/csv" class="btn btn-xs btn-primary pull-right" style="margin-right:15px" >Import CSV</a></div>
                     <div class="panel-body">
-                        <table class="table" id="myTable">
+                        <table class="table sortableTable" id="myTable">
                             <thead>
                                 <th>name</th>
                                 <th class="hidden-xs">email</th>
@@ -67,14 +67,11 @@
 @endsection
 
 @section('scripts')
-    <script src="/back/js/deleteItem.js"></script>
     <script>
         var deleteEntry = function(target){
             $(target).deleteItem({
-                url:"{{route('admin.authentication.users.index')}}"
+                url:"{{route('admin.users.index')}}"
             })
         };
-
-        $('#myTable').DataTable();
     </script>
 @endsection

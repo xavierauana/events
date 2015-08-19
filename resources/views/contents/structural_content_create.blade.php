@@ -95,4 +95,5 @@
             </div>
         </div>
     </div>
+    @include("contents.partials.mediaLibaryModal")
 @endsection

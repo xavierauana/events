@@ -11,71 +11,50 @@ namespace App\Validators;
 
 
 use App\Entities\Layout;
+use App\Template;
+use Illuminate\Support\Facades\App;
 
 class PageValidator extends Validator {
-
-    private $layout;
-
 
     private $rules = array(
         'url' => 'required|alpha_dash|unique:pages,url',
         'active' => 'required|in:0,1',
-        'layout' => 'required',
     );
 
     protected $update = array(
         'active' => 'required|in:0,1',
-        'layout' => 'required',
     );
+
+    protected $templateIds;
 
     /**
      * @param \App\Entities\Layout $layout
      */
-    function __construct(Layout $layout)
+    function __construct()
     {
-        $this->layout = $layout;
-        $layouts = $this->layout->getAllLayouts();
-        $this->setLayoutRule($layouts);
+        $this->templateIds = implode(",", App::make(Template::class)->lists("id")->toArray());
     }
 
-    /**
-     * @param array $layouts
-     */
-    private function setLayoutRule(array $layouts)
+    public function getUpdateRules($id)
     {
-        $rules = "in:";
-
-        $keys = array_keys($layouts);
-        foreach($keys as $index => $key)
-        {
-            $rules .= $key;
-            if($index < count($keys)-1) $rules .=",";
-        }
-        $this->rules['layout'] = $rules;
-    }
-
-    function getUpdateRules($id=null)
-    {
+        $rules = $this->getBasicRules();
         if(property_exists($this,'update'))
         {
-            $this->update['url'] = "required|alpha_dash|unique:pages,url,{$this->data['pageId']}";
-            return $this->update;
-        }else{
-            $this->getBasicRules();
+            $rules['url'] = "required|alpha_dash|unique:pages,url,$id";
         }
+        return $rules;
     }
 
-    function getBasicRules()
+    public function getBasicRules()
     {
-        return $this->rules;
+        $rules = $this->rules;
+        $rules["template_id"] = "required|in:$this->templateIds";
+        return $rules;
     }
-    function getStoreRules()
+
+    public function getStoreRules()
     {
-        if(property_exists($this, 'store'))
-        {
-            return $this->store;
-        }else{
-            return $this->rules;
-        }
+        $rules = $this->getBasicRules();
+        return $rules;
     }
 }

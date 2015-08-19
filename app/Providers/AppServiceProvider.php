@@ -14,6 +14,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        view()->share('activeLanguages', cache('active_languages'));
+        view()->share('defaultLanguage', cache('default_language'));
     }
 
     /**

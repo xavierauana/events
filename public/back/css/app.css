@@ -1,0 +1,8 @@
+#mediaLibrary .img-container {
+  border: white solid 2px;
+}
+#mediaLibrary .img-container.selected {
+  border: blue solid 2px;
+}
+
+/*# sourceMappingURL=app.css.map */

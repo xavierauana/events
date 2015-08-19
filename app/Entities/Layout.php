@@ -115,6 +115,13 @@ class Layout {
         $contentFields = $this->constructContentFields($layouts);
         $this->migration->createLayoutTables($contentFields);
     }
+
+    public function createLayoutTable($layout)
+    {
+        $theLayout = [$layout];
+        $contentFields = $this->constructContentFields($theLayout);
+        $this->migration->createLayoutTables($contentFields);
+    }
     /**
      * @return void
      */

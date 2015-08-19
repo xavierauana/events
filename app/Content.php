@@ -3,19 +3,16 @@
 namespace App;
 
 use App\Contracts\Repositories\ContentInterface;
+use App\Contracts\Repositories\PageInterface;
+use App\Services\ParsingContentFile;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Content extends Model implements ContentInterface
 {
 
-    protected $table;
-
-    function __construct($table=null)
-    {
-        if($table) $this->table = $table;
-        parent::__construct();
-    }
+    protected $table = "";
 
     /**
      * @return array
@@ -85,4 +82,44 @@ class Content extends Model implements ContentInterface
     {
         return $query->wherePage_id($pageId);
     }
+
+    public function getContents(PageInterface $page)
+    {
+        $this->setTable((new ParsingContentFile())->getLayoutTableName($page->template->file));
+        $contents = $this->wherePageId($page->id)->get();
+
+        if(!count($contents)>0){
+            $contents = $this->createInitialContent($page);
+        }
+        return $contents;
+    }
+
+    private function createInitialContent($page)
+    {
+        $languages = cache("active_languages");
+
+        $collection = new Collection();
+        $this->setTable((new ParsingContentFile())->getLayoutTableName($page->template->file));
+        $this->create([
+            "lang_id"=> 1,
+            "page_id"=> 1,
+        ]);
+//        foreach($languages as $language){
+//            $collection->add([
+//                "lang_id"=>$language->id,
+//                "page_id"=>$page->id
+//            ]);
+//            $collection->add($this->create([
+//                "lang_id"=>$language->id,
+//                "page_id"=>$page->id
+//            ]));
+//        }
+
+        dd($collection);
+
+        return $collection;
+
+    }
+
+
 }

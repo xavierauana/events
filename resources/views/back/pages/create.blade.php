@@ -1,3 +1,4 @@
+@inject("template", "App\Template")
 @extends('back.layouts.default')
 
 @section('content')
@@ -25,9 +26,9 @@
                         
                         {{-- Layout Form Input--}}
                         <div class="form-group">
-                            {!! Form::label("layout","Layout:") !!}
-                            {!! Form::select("layout",$layouts,null,array("class"=>"form-control")) !!}
-                            {!! $errors->first('layout',"<span class='input-error'>:message</span>") !!}
+                            {!! Form::label("template_id","Layout:") !!}
+                            {!! Form::select("template_id",$template->lists("display", "id"),null,array("class"=>"form-control")) !!}
+                            {!! $errors->first('template_id',"<span class='input-error'>:message</span>") !!}
                         </div>
 
                         {!! Form::submit("Create", array('class'=>'btn btn-success')) !!}
