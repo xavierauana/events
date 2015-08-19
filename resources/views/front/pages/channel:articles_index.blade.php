@@ -68,7 +68,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container" id="vue">
         <div class="hero_container clearfix">
             <img src="http://lorempixel.com/800/350/sports" width="100%"alt="" />
             <div class="description text-center">
@@ -162,6 +162,16 @@
 @endsection
 
 @section('scripts')
+    <script>
+        var articlesvue = new Vue({
+            el: "#vue",
+            ready:function(){
+                console.log("vue ready")
+            }
+        })
+    </script>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>
     <script src="http://imagesloaded.desandro.com/imagesloaded.pkgd.min.js"></script>
     <script>

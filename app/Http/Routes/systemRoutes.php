@@ -13,21 +13,19 @@
         Route::get('dashboard', array(
             'as'    => 'subs.dashboard',
             'uses'  =>  function(){
-                return View::make('front.pages.single:dashboard');
+                return view('front.pages.single:dashboard');
             }
         ));
-        Route::get('/admin/CKEditorFileBrowser', function(){
-//        return Input::all();
-            $medias = Media::all();
-            return View::make('back.ckeditor.browser',compact('medias'));
-        });
 
         Route::get('/admin/dashboard', [
-            'middleware' => 'hasRole:administrator|developer',
+            'middleware' => 'hasRole:administrator,developer',
             'as' => 'dashboard',
             'uses' => "HomeController@toBackendDashboard"
         ]);
 
+        /*
+         * These are routes for major function of the cms
+         */
         Route::group(['prefix'=>'admin'], function(){
             require_once __DIR__."/Routes/pages.php";
             require_once __DIR__."/Routes/partials.php";
@@ -36,21 +34,8 @@
             require_once __DIR__."/Routes/languages.php";
             require_once __DIR__."/Routes/menus.php";
             require_once __DIR__."/Routes/contents.php";
-            require_once __DIR__."/Routes/templates.php";
             require_once __DIR__."/Routes/ajax.php";
 
-            Route::get("contentfields/check/{templateId}",[
-                "as"=>"admin.contentfields.check",
-                "uses"=>"ContentFieldsController@check"
-            ]);
-            Route::post("contentfields/{templateId}",[
-                "as"=>"admin.contentfields.store",
-                "uses"=>"ContentFieldsController@store"
-            ]);
-            Route::patch("contentfields/update/{templateId}",[
-                "as"=>"admin.contentfields.update",
-                "uses"=>"ContentFieldsController@update"
-            ]);
 
             /*
              * This is the section for managing role base authentication
@@ -62,22 +47,32 @@
             /*
              * This is the section for managing layouts templates
              */
-            Route::group(['prefix'=>'dev','middleware'=>"hasRole:developer"], function(){
-                require_once __DIR__."/Routes/devlayouts.php";
+            Route::group(['middleware'=>"hasRole:developer"], function(){
+                require_once __DIR__."/Routes/templates.php";
+                require_once __DIR__."/Routes/contentFields.php";
             });
 
         });
 
     });
 
+    /**
+     * The route response for handling login, logout, registration and password reset.
+     */
     Route::controllers([
         'auth' => 'Auth\AuthController',
         'password' => 'Auth\PasswordController',
     ]);
 
+    /**
+     * The route response for handling api calls
+     */
     Route::group(['prefix'=>'api'], function(){
         Route::any('/{segment1?}/{segment2?}/{segment3?}/{segment4?}', 'RoutesController@route');
     });
 
+    /**
+     * This route is manage request for front end
+     */
     Route::get('/{segment1?}/{segment2?}/{segment3?}/{segment4?}', 'RoutesController@route');
 

@@ -1,5 +1,4 @@
 
-@inject("content", "")
 @extends('front.layouts.default')
 
 @section('meta')
@@ -119,10 +118,10 @@
     <div class="container" style="padding-top:0" id="vue">
         <div class="col-md-9">
             <div class="info" layout-content="info" content-type="text">
-                {{$content->info}}
+                info
             </div>
             <div class="details" layout-content="details" content-type="text">
-                {{$content->details}}
+                detail
             </div>
             <div class="social_link">
                 <ul class="list-inline">
@@ -151,9 +150,9 @@
         <div class="col-md-3">
             <img class="img-responsive" src="http://lorempixel.com/600/500/people/" alt="" />
             <div class="writer_description" layout-content="writer_description" content-type="text">
-                {{$content->writer_description}}
+                writer description
             </div>
-            <a href="/writer/{{$content->id}}" class="writer_profile">MORE</a>
+            <a href="/writer/id" class="writer_profile">MORE</a>
         </div>
     </div>
 

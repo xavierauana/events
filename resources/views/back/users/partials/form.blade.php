@@ -8,7 +8,7 @@
 <div class="form-group">
     <label class="col-md-4 control-label">E-Mail Address</label>
     <div class="col-md-6">
-        @if(Auth::user()->canDo('user','update'))
+        @if(Auth::user()->canDo("user","edit"))
             {!! Form::input('email', 'email',null,array('class'=>'form-control',"required"=>true)) !!}
         @else
             {!! Form::input('email', 'email',null,array('class'=>'form-control', 'disabled')) !!}
@@ -16,7 +16,7 @@
     </div>
 </div>
 
-    @if(isset($user) && $user->canDo('user','update'))
+    @if(Auth::user()->canDo('user','edit'))
         <div class="form-group">
             <label class="col-md-4 control-label">Role</label>
             <div class="col-md-6">

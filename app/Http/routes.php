@@ -11,20 +11,18 @@
     |
     */
 
-    use App\Media;
 
-
-    Route::get("media/testing", function(){
-
-       return view('mediatesting');
-    });
-    Route::post("media/testing", function(\Illuminate\Http\Request $request){
-        $fileService = new \App\Services\ManageMediaService();
-        $filePath = $fileService->create($request->file("file"));
-        dd($filePath);
-    });
-
-
+//    Route::get('articles/detail', function(){
+//        return view('front.pages.channel:articles');
+//    });
+//
+//    Route::get('writers', function(){
+//        return view('front.pages.channel:writers_index');
+//    });
+//
+//    Route::get('writers/{id}', function(){
+//        return view('front.pages.channel:writers');
+//    });
 
     /*
      * This section is for routing page for login into back end system
@@ -55,9 +53,7 @@
     Route::get('articles', function(){
         return view('front.pages.channel:articles_index');
     });
-    Route::get('articles/detail', function(){
-        return view('front.pages.channel:articles');
-    });
+
 
     Route::get('eventdetail', function(){
         return view('front.pages.channel:event');
@@ -74,12 +70,8 @@
     Route::get('groups', function(){
         return view('front.pages.channel:groups_index');
     });
-    Route::get('writers', function(){
-        return view('front.pages.channel:writers_index');
-    });
-    Route::get('writers/{id}', function(){
-        return view('front.pages.channel:writers');
-    });
+
+
     Route::get('login', function(){
         return view('front.pages.single:login');
     });
