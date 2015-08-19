@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="12250a26-2acd-4d4f-a6d8-5f0557c4f96e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/SettingServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/SettingServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
     </list>
     <ignored path="events.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,8 +57,8 @@
       <file leaf-file-name="SettingServiceProvider.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Providers/SettingServiceProvider.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30402932">
-              <caret line="54" column="34" selection-start-line="19" selection-start-column="26" selection-end-line="54" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.92673993">
+              <caret line="54" column="32" selection-start-line="19" selection-start-column="24" selection-end-line="54" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -923,8 +922,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Providers/SettingServiceProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30402932">
-          <caret line="54" column="34" selection-start-line="19" selection-start-column="26" selection-end-line="54" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.92673993">
+          <caret line="54" column="32" selection-start-line="19" selection-start-column="24" selection-end-line="54" selection-end-column="32" />
           <folding />
         </state>
       </provider>
