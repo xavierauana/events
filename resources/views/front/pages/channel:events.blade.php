@@ -103,27 +103,42 @@
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                @if($content->image1)
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                @endif
+                @if($content->image2)
+                    <li data-target="#carousel-example-generic" data-slide-to="1" ></li>
+                @endif
+                @if($content->image3)
+                    <li data-target="#carousel-example-generic" data-slide-to="2" ></li>
+                @endif
+                @if($content->image4)
+                    <li data-target="#carousel-example-generic" data-slide-to="3" ></li>
+                @endif
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="{{$content->image1}}" width="100%" alt="...">
-                </div>
-                <div class="item ">
-                    <img src="{{$content->image2}}" width="100%" alt="...">
-                </div>
-                <div class="item ">
-                    <img src="{{$content->image3}}" width="100%" alt="...">
-                </div>
-                <div class="item ">
-                    <img src="{{$content->image4}}" width="100%" alt="...">
-                </div>
-
+                @if($content->image1)
+                    <div class="item active">
+                        <img src="{{$content->image1}}" width="100%" alt="...">
+                    </div>
+                @endif
+                @if($content->image2)
+                    <div class="item">
+                        <img src="{{$content->image2}}" width="100%" alt="...">
+                    </div>
+                @endif
+                @if($content->image3)
+                    <div class="item">
+                        <img src="{{$content->image3}}" width="100%" alt="...">
+                    </div>
+                @endif
+                @if($content->image4)
+                    <div class="item">
+                        <img src="{{$content->image4}}" width="100%" alt="...">
+                    </div>
+                @endif
             </div>
 
             <!-- Controls -->
@@ -161,10 +176,30 @@
 
             <div class="hidden-xs hidden-sm">
                 <div class="row">
-                    <div class="col-md-3" v-show="otherEvent1">testing1</div>
-                    <div class="col-md-3" v-show="otherEvent2">testing2</div>
-                    <div class="col-md-3" v-show="otherEvent3">testing3</div>
-                    <div class="col-md-3" v-show="otherEvent4">testing4</div>
+                    <div class="col-md-3" v-show="otherEvents[0]">
+                        <a href="/events/@{{ otherEvent[0].content_identifier  }}">
+                            <img src="@{{ otherEvents[0].image1 }}" class="img-responsive" alt="">
+                            <p>@{{ otherEvents[0].summary }}</p>
+                        </a>
+                    </div>
+                    <div class="col-md-3" v-show="otherEvents[1]">
+                        <a href="/events/{{config("app.locale")}}/@{{ otherEvent[1].content_identifier  }}">
+                            <img src="@{{ otherEvents[1].image1 }}" class="img-responsive" alt="">
+                            <p>@{{ otherEvents[1].summary }}</p>
+                        </a>
+                    </div>
+                    <div class="col-md-3" v-show="otherEvents[2]">
+                        <a href="/events/{{config("app.locale")}}/@{{ otherEvent[2].content_identifier  }}">
+                            <img src="@{{ otherEvents[2].image1 }}" class="img-responsive" alt="">
+                            <p>@{{ otherEvents[2].summary }}</p>
+                        </a>
+                    </div>
+                    <div class="col-md-3" v-show="otherEvents[3]">
+                        <a href="/events/{{config("app.locale")}}/@{{ otherEvent[3].content_identifier  }}">
+                            <img src="@{{ otherEvents[3].image1 }}" class="img-responsive" alt="">
+                            <p>@{{ otherEvents[3].summary }}</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -224,10 +259,7 @@
             data:{
                 previous: null,
                 next: null,
-                otherEvent1:null,
-                otherEvent2:null,
-                otherEvent3:null,
-                otherEvent4:null
+                otherEvents:[]
             },
             methods:{
                 constructLinks: function(){
@@ -236,25 +268,40 @@
                     queryString = moment(eventDate).format("YYYY-MM-DD");
                     this.$http.get('/api/search?page=events&'+queryCol+'='+queryString, function(data, status, request){
                         if( data.result.length > 1 ){
-                      var currentContentIdentifier = "{{$content->content_identifier}}";
-                      var newArray = data.result.sort(function(a,b){
-                          return a.eventStartDate > b.eventStartDate? -1 : 1
-                      });
-                      for(var i = 0; i < newArray.length; i++){
-                          if(newArray[i].content_identifier == currentContentIdentifier){
-                              if(i > 0){
-                                  this.previous = "/events/"+newArray[i-1].content_identifier
-                              }
-                              if(i < newArray.length-1 ){
-                                  this.next = "/events/"+newArray[i+1].content_identifier
+                          var currentContentIdentifier = "{{$content->content_identifier}}";
+                          var newArray = data.result.sort(function(a,b){
+                              return a.eventStartDate > b.eventStartDate? -1 : 1
+                          });
+                          for(var i = 0; i < newArray.length; i++){
+                              if(newArray[i].content_identifier == currentContentIdentifier){
+                                  if(i > 0){
+                                      this.previous = "/events/"+newArray[i-1].content_identifier
+                                  }
+                                  if(i < newArray.length-1 ){
+                                      this.next = "/events/"+newArray[i+1].content_identifier
+                                  }
                               }
                           }
                       }
-                  }
                     })
                 },
                 getSimilarEvents: function(){
+                    var url, queryCol, queryString, queryCol1, queryString1;
+                    queryCol = "cat";
+                    queryString = "{{$content->cat}}";
+                    queryCol1 = "lgt";
+                    queryString1 = "eventStartDate,"+moment().format("YYYY-MM-DD");
 
+                    url = '/api/search?page=events&'+queryCol+'='+queryString+"&"+queryCol1+"="+queryString1+"&limit=5";
+
+                    this.$http.get( url , function(data, status, request){
+                    var self = this;
+                        data.result.filter(function(event){
+                            return event.content_identifier !== "{{$content->content_identifier}}"
+                        }).map(function(event){
+                            self.otherEvents.push(event);
+                        });
+                    })
                 }
             },
             ready: function(){

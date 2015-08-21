@@ -54,12 +54,16 @@ class RoutesController extends Controller
     {
         $this->requestObject = new ParseUrl($request);
         if($this->requestObject->isSearch){
+
     $t0 = microtime(true);
+
             $result = $this->parseSearchQuery();
+
     $t1 = microtime(true);
     $performance = ($t1-$t0)*1000;
     // log search performance
     (new LogService())->log('The search duration is '.$performance.' milisecond', "info" , "searchPerformance");
+
             if($this->requestObject->isAjax){
                 if(count($result)>0){
                     return ["response"=>"completed","result"=>$result];

@@ -89,6 +89,13 @@
             if($col == "limit"){
                 return $query->take($val);
             }
+            if($col == 'lgt'){
+                $array = explode(',',$val);
+                return $query->where($array[0],">=", $array[1]);
+            }
+            if($col == 'smt'){
+
+            }
             return $query->where($col, "like", "%$val%");
         }
     }

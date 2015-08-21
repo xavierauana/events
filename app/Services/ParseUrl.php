@@ -113,7 +113,6 @@
 
                 return $segments;
             }
-
             return $segments;
         }
 
