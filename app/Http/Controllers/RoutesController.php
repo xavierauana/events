@@ -144,6 +144,8 @@ class RoutesController extends Controller
             }
         }
 
+
+
         if($this->noSearchResult){
             return false;
         }
@@ -163,7 +165,12 @@ class RoutesController extends Controller
                 foreach($tables as $table){
                     $contentObject->setTable($table);
                     foreach($queries as $col=>$val){
-                        $contentObject = $contentObject->search($col, $val);
+                        if($col == "limit"){
+                            $val = (int) $val;
+                            $contentObject = $contentObject->search($col, $val);
+                        }else{
+                            $contentObject = $contentObject->search($col, $val);
+                        }
                     }
                     $searchResult = $searchResult->merge($contentObject->get()->all());
                 }

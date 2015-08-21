@@ -86,6 +86,9 @@
 
         public function scopeSearch($query, $col, $val)
         {
+            if($col == "limit"){
+                return $query->take($val);
+            }
             return $query->where($col, "like", "%$val%");
         }
     }

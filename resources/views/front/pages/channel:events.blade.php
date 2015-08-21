@@ -155,16 +155,16 @@
             </div>
 
             <div class="links visible-md visible-lg clearfix">
-                <a href="#" class="pull-left">Previous</a>
-                <a href="#" class="pull-right">Next</a>
+                <a href="@{{ previous }}" v-show="previous" class="pull-left">Previous</a>
+                <a href="@{{ next }}" v-show="next" class="pull-right">Next</a>
             </div>
 
             <div class="hidden-xs hidden-sm">
                 <div class="row">
-                    <div class="col-md-3">testing1</div>
-                    <div class="col-md-3">testing2</div>
-                    <div class="col-md-3">testing3</div>
-                    <div class="col-md-3">testing4</div>
+                    <div class="col-md-3" v-show="otherEvent1">testing1</div>
+                    <div class="col-md-3" v-show="otherEvent2">testing2</div>
+                    <div class="col-md-3" v-show="otherEvent3">testing3</div>
+                    <div class="col-md-3" v-show="otherEvent4">testing4</div>
                 </div>
             </div>
         </div>
@@ -184,14 +184,12 @@
 
             <div class="links hidden-md hidden-lg">
                 <br />
-                <a href="#" class="pull-left clearfix btn btn-default btn-lg">Previous</a>
-                <a href="#" class="pull-right clearfix btn btn-default btn-lg">Next</a>
+                <a href="@{{ previous }}" v-show="previous"  class="pull-left clearfix btn btn-default btn-lg">Previous</a>
+                <a href="@{{ next }}"  v-show="next" class="pull-right clearfix btn btn-default btn-lg">Next</a>
             </div>
         </div>
     </div>
 
-<span class="sr-only" layout-content="event_start_date" content-type="datetime">Event Start Date</span>
-<span class="sr-only" layout-content="event_end_date" content-type="datetime">Event End Date</span>
     <script type="text/template" id="calTemplate" >
         <div class="clndr-controls">
             <div class="month"><%= month.toUpperCase() %></div>
@@ -219,6 +217,51 @@
                 { date: eventDate, title: 'CLNDR GitHub Page Finished', url: 'http://github.com/kylestetz/CLNDR' }
             ]
         });
+
+
+        var eventVue = new Vue({
+            el: "#vue",
+            data:{
+                previous: null,
+                next: null,
+                otherEvent1:null,
+                otherEvent2:null,
+                otherEvent3:null,
+                otherEvent4:null
+            },
+            methods:{
+                constructLinks: function(){
+                    var queryCol, queryString;
+                    queryCol = "eventStartDate";
+                    queryString = moment(eventDate).format("YYYY-MM-DD");
+                    this.$http.get('/api/search?page=events&'+queryCol+'='+queryString, function(data, status, request){
+                        if( data.result.length > 1 ){
+                      var currentContentIdentifier = "{{$content->content_identifier}}";
+                      var newArray = data.result.sort(function(a,b){
+                          return a.eventStartDate > b.eventStartDate? -1 : 1
+                      });
+                      for(var i = 0; i < newArray.length; i++){
+                          if(newArray[i].content_identifier == currentContentIdentifier){
+                              if(i > 0){
+                                  this.previous = "/events/"+newArray[i-1].content_identifier
+                              }
+                              if(i < newArray.length-1 ){
+                                  this.next = "/events/"+newArray[i+1].content_identifier
+                              }
+                          }
+                      }
+                  }
+                    })
+                },
+                getSimilarEvents: function(){
+
+                }
+            },
+            ready: function(){
+                this.constructLinks();
+                this.getSimilarEvents();
+            }
+        })
     </script>
 
 @endsection
