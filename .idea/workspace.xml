@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12250a26-2acd-4d4f-a6d8-5f0557c4f96e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/Content.php" afterPath="$PROJECT_DIR$/app/Services/Content.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/ParseUrl.php" afterPath="$PROJECT_DIR$/app/Services/ParseUrl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/RoutesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/RoutesController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/front/pages/channel:events.blade.php" afterPath="$PROJECT_DIR$/resources/views/front/pages/channel:events.blade.php" />
     </list>
     <ignored path="events.iws" />
@@ -30,8 +27,8 @@
       <file leaf-file-name="channel:events.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/front/pages/channel:events.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6703297">
-              <caret line="137" column="36" selection-start-line="137" selection-start-column="36" selection-end-line="137" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.52380955">
+              <caret line="291" column="45" selection-start-line="291" selection-start-column="45" selection-end-line="291" selection-end-column="45" />
               <folding>
                 <element signature="e#9885#10856#0#HTML" expanded="false" />
               </folding>
@@ -862,8 +859,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/front/pages/channel:events.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6703297">
-          <caret line="137" column="36" selection-start-line="137" selection-start-column="36" selection-end-line="137" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.52380955">
+          <caret line="291" column="45" selection-start-line="291" selection-start-column="45" selection-end-line="291" selection-end-column="45" />
           <folding>
             <element signature="e#9885#10856#0#HTML" expanded="false" />
           </folding>

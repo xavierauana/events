@@ -289,6 +289,7 @@
                     var url, queryCol, queryString, queryCol1, queryString1;
                     queryCol = "cat";
                     queryString = "{{$content->cat}}";
+                    console.log(queryString);
                     queryCol1 = "lgt";
                     queryString1 = "eventStartDate,"+moment().format("YYYY-MM-DD");
 
