@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Contracts\Repositories\ContentInterface;
 use App\Contracts\Repositories\LanguageInterface;
 use App\Contracts\Repositories\PageInterface;
-use App\Services\LogService;
-use App\Services\ParseUrl;
+use App\Services\getFrontEndContent;
+use App\Services\HttpRequest;
 use App\Services\ParsingContentFile;
+use App\Services\PerformanceLogger;
 use App\Template;
 use Illuminate\Http\Request;
 
@@ -21,22 +22,9 @@ use Monolog\Logger;
 
 class RoutesController extends Controller
 {
-
-    // TODO: with lang code structural index
-    // TODO: with lang code structural
-    // TODO: with lang code structural no page
-    // TODO: with lang code structural with identifier
-    // TODO: with lang code structural with wrong identifier
-
-    // TODO: without lang code structural index
-    // TODO: without lang code structural index
-    // TODO: without lang code structural
-    // TODO: without lang code structural no page
-    // TODO: without lang code structural with identifier
-    // TODO: without lang code structural with wrong identifier
-    //
     private $contentService;
-    private $requestObject;
+    private $getContentService;
+    private $httpRequest;
     private $noSearchResult;
 
     /**
@@ -46,73 +34,63 @@ class RoutesController extends Controller
      */
     public function __construct(ContentInterface $contentService)
     {
+        $this->getContentService = new getFrontEndContent();
         $this->contentService = $contentService;
     }
 
-
-    public function route(Request $request)
+    public function route(Request $request, PerformanceLogger $logger)
     {
-        $this->requestObject = new ParseUrl($request);
-        if($this->requestObject->isSearch){
+        $this->httpRequest = new HttpRequest($request);
+//        if($this->httpRequest->requestIsSearching){
+//
+//            $logger->start();
+//
+//            $result = $this->parseSearchQuery();
+//
+//            $logger->end();
+//
+//
+//            if($this->httpRequest->isAjax){
+//                if(count($result)>0){
+//                    return ["response"=>"completed","result"=>$result];
+//                }else{
+//                    return ["response"=>"completed","result"=>null];
+//                }
+//            }else{
+//                return view("front.pages.search",compact("result"));
+//            }
+//        }
 
-    $t0 = microtime(true);
-
-            $result = $this->parseSearchQuery();
-
-    $t1 = microtime(true);
-    $performance = ($t1-$t0)*1000;
-    // log search performance
-    (new LogService())->log('The search duration is '.$performance.' milisecond', "info" , "searchPerformance");
-
-            if($this->requestObject->isAjax){
-                if(count($result)>0){
-                    return ["response"=>"completed","result"=>$result];
-                }else{
-                    return ["response"=>"completed","result"=>null];
-                }
-            }else{
-                return view("front.pages.search",compact("result"));
-            }
-        }
-
-        if($this->requestObject->type == 'single'){
+        if($this->httpRequest->page->template->type == 'single'){
             return $this->getSingleContentAndRenderView();
         }
-        if($this->requestObject->type == 'channel'){
+        if($this->httpRequest->page->template->type == 'channel'){
             return $this->getChannelContentAndRenderView();
         }
-        if($this->requestObject->type == 'structural'){
+        if($this->httpRequest->page->template->type == 'structural'){
             return $this->getStructuralContentAndRenderView();
         }
-
     }
 
 
     private function getSingleContentAndRenderView()
     {
-        $table = (new ParsingContentFile())->getLayoutTableName($this->requestObject->page->template->file);
-        $content = $this->contentService->retrieveContentForFrontEndWithLangId($this->requestObject->language->id, $table)->first();
-        if($this->requestObject->isAjax) return $content;
-        return view("front.pages.".$this->requestObject->page->template->view, compact("content"));
+        $content = $this->getContentService->getContent($this->httpRequest->page->template->type, $this->httpRequest);
+        if($this->httpRequest->isAjax) return $content;
+        return view("front.pages.".$this->httpRequest->page->template->view, compact("content"));
     }
 
     private function getChannelContentAndRenderView()
     {
-        $object = $this->requestObject;
-        $table = (new ParsingContentFile())->getLayoutTableName($this->requestObject->page->template->file);
-        $contents = $this->contentService->retrieveContentForFrontEndWithLangId($this->requestObject->language->id, $table);
-        if($this->requestObject->identifier){
-            $content = $contents->filter(function($item)use($object){
-                if($item->content_identifier == $object->identifier) return true;
-            })->first();
-            if(count($content)>0){
-                if($this->requestObject->isAjax) return $content;
-                return view("front.pages.".$this->requestObject->page->template->view, compact('content'));
-            }
-            abort(404, $this->message_404);
+        $contents = $this->getContentService->getContent($this->httpRequest->page->template->type, $this->httpRequest);
+
+        if($this->httpRequest->isAjax) return $contents;
+
+        if($this->httpRequest->identifier){
+            return view("front.pages.".$this->httpRequest->page->template->view, ['content'=>$contents]);
         }
-        if($this->requestObject->isAjax) return $contents;
-        return view("front.pages.".$this->requestObject->page->template->view."_index", compact('contents'));
+
+        return view("front.pages.".$this->httpRequest->page->template->view."_index", compact('contents'));
 
     }
 
@@ -122,7 +100,7 @@ class RoutesController extends Controller
 
     private function parseSearchQuery()
     {
-        $queries = $this->requestObject->queries;
+        $queries = $this->httpRequest->queries;
         $contentObject = $this->contentService;
         if( ! count($queries)>0){
             return false;

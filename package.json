@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "laravel-elixir": "^2.0.0",
-    "FortAwesome/Font-Awesome": "*"
+    "FortAwesome/Font-Awesome": "*",
+    "ckeditor-imgresize": "^1.0.1"
   }
 }

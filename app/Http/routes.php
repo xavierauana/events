@@ -11,19 +11,6 @@
     |
     */
 
-
-//    Route::get('articles/detail', function(){
-//        return view('front.pages.channel:articles');
-//    });
-//
-//    Route::get('writers', function(){
-//        return view('front.pages.channel:writers_index');
-//    });
-//
-//    Route::get('writers/{id}', function(){
-//        return view('front.pages.channel:writers');
-//    });
-
     /*
      * This section is for routing page for login into back end system
      */

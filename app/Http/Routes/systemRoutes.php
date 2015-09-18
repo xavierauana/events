@@ -8,7 +8,12 @@
     /*
      * This section is all the operation in the backend CMS system
      */
-    Route::group(array('middleware'=>'auth'), function(){
+use App\Http\Requests\Request;
+
+Route::group(array('middleware'=>'auth'), function(){
+
+        Route::post('CKEditorFileUploader/upload', "CKEditorController@upload");
+
 
         Route::get('dashboard', array(
             'as'    => 'subs.dashboard',
@@ -18,7 +23,6 @@
         ));
 
         Route::get('/admin/dashboard', [
-            'middleware' => 'hasRole:administrator,developer',
             'as' => 'dashboard',
             'uses' => "HomeController@toBackendDashboard"
         ]);
@@ -68,7 +72,7 @@
      * The route response for handling api calls
      */
     Route::group(['prefix'=>'api'], function(){
-        Route::any('/{segment1?}/{segment2?}/{segment3?}/{segment4?}', 'RoutesController@route');
+        Route::any('/{segment1?}/{segment2?}/{segment3?}/{segment4?}', 'ApisController@route');
     });
 
     /**

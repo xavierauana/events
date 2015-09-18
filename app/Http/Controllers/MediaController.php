@@ -29,7 +29,7 @@ class MediaController extends Controller
             if($request->hasFile('file')){
                 $fileObject = $this->mediaManager->create($request->file("file"));
                 return ['testing'=>$fileObject];
-                return ['response'=>"completed", "message"=>"file upload and db update", "fileObject" => $fileObject];
+//                return ['response'=>"completed", "message"=>"file upload and db update", "fileObject" => $fileObject];
             }
             return ['response'=>"error", "message"=>"no file upload", "fileObject" =>null];
         }

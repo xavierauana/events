@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Contracts\Repositories\LanguageInterface;
 use App\Contracts\Repositories\PageInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 
 class SettingServiceProvider extends ServiceProvider

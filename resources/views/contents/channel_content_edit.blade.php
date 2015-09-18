@@ -103,5 +103,13 @@
 @endsection
 
 @section("scripts")
-
+    <script>
+        $(document).on("click", "span.cke_button_icon.cke_button__image_icon", function(){
+            var form;
+            setTimeout(function(){
+                form =  $("iframe.cke_dialog_ui_input_file").contents().find("form").append("<input type='hidden'name='_token' value='{{csrf_token()}}' />");
+                console.log(form)
+            }, 1000);
+        })
+    </script>
 @endsection
