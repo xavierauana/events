@@ -198,16 +198,6 @@
                 <a href="@{{ next }}" v-show="next" class="pull-right">Next</a>
             </div>
 
-            <div class="hidden-xs hidden-sm">
-                <div class="row">
-                    <div class="col-md-3" v-repeat="otherEvents" v-show="otherEvents[0]">
-                        <a href="@{{ '/events/'+ content_identifier  }}">
-                            <img src="@{{ image1 }}" class="img-responsive" alt="">
-                            <p>@{{ summary }}</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="col-md-3">
             <div id="calendar"> </div>
@@ -220,6 +210,17 @@
                 <p v-show="isVenue" v-text="venue"></p>
             </div>
             <button class="btn btn-default btn-block" v-class="favorite: isFavorite" v-on="click: toggleFavorite"><i class="fa fa-heart-o"></i> Bookmark</button>
+            <br>
+            <div class="hidden-xs hidden-sm">
+                <div class="row">
+                    <div class="col-xs-12" v-repeat="otherEvents" v-show="otherEvents[0]">
+                        <a href="@{{ '/events/'+ content_identifier  }}">
+                            <img src="@{{ image1 }}" class="img-responsive" alt="">
+                            <p>@{{ summary }}</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
             <div class="links hidden-md hidden-lg">
                 <br />
