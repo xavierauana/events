@@ -35,8 +35,12 @@
 
         public function get($code)
         {
-            $setting = $this->setting->whereCode($code)->firstOrFail();
-            return $setting->value;
+            try{
+                $setting = $this->setting->whereCode($code)->firstOrFail();
+                return $setting->value;
+            }finally{
+                return "";
+            }
         }
 
     }

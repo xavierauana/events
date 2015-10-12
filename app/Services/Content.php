@@ -83,6 +83,16 @@
             }
             return $this->whereLangId($langId)->whereActive(1)->get();
         }
+        public function retrieveChannelContentForFrontEndWithLangId($langId, $table = null, $identifier=null)
+        {
+            if($table){
+                $this->setTable($table);
+            }
+            if($identifier){
+                return $this->whereLangId($langId)->whereActive(1)->whereContentIdentifier($identifier)->first();
+            }
+            return $this->whereLangId($langId)->whereActive(1)->get();
+        }
 
         public function scopeSearch($query, $col, $val)
         {

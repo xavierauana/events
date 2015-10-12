@@ -2,7 +2,7 @@
     <div class="container upper hidden-sm hidden-xs" style="height:100px; margin-top:15px">
         <div class="logo-container"
              style="background-color: white; height:75px; display: inline-block; width:110px; margin-left:15px">
-            <a href="{{route("home")}}">
+            <a href="/">
                 <img src="/front/imgs/logo.jpg" width="100%" alt="" />
             </a>
         </div>

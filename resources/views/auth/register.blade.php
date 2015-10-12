@@ -1,3 +1,4 @@
+
 @extends('front.layouts.default')
 
 @section('meta')
@@ -36,7 +37,7 @@
             <p>歡迎來到我們網站，如果您是新用戶，請填寫下面的表單進行註冊。如果您已經是本站的會員，請您直接登錄。</p>
             <div class="col-md-6">
                 <ul class="list-unstyled">
-                    <li><a class="btn btn-primary btn-block" href="#"><i class="fa fa-facebook"></i> Registration with Facebook</a></li>
+                    <li><a class="btn btn-primary btn-block" href=""><i class="fa fa-facebook"></i> Registration with Facebook</a></li>
                     <li><a class="btn btn-primary btn-block" href=""><i class="fa fa-twitter"></i> Registration with Twitter</a></li>
                     <li><a class="btn btn-primary btn-block" href=""><i class="fa fa-google"></i> Registration with Google</a></li>
                 </ul>

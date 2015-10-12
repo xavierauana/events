@@ -10,6 +10,7 @@ namespace App\Entities;
 
 use App\Contracts\Entities\FileHandlerInterface;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
@@ -26,12 +27,14 @@ class FileHandler implements FileHandlerInterface  {
 
     protected $path;
     private $prefix;
+    private $intervention;
 
     /**
      * @param null $path
      */
     function __construct()
     {
+        $this->intervention = new ImageManager();
         // set default path
         $this->path = public_path().'/files';
         $this->prefix = time();
@@ -60,8 +63,11 @@ class FileHandler implements FileHandlerInterface  {
 
         $urlEncodeFileName = urlencode($filename);
 
+        // adjust image size by Intervention and get back a intervention file object
+        $file = $this->adjustFile($file);
+
         // move the upload file to the designated location
-        $file->move($directory,$urlEncodeFileName);
+        $file->save($directory."/".$urlEncodeFileName);
 
         // return the absolute file path
         return "$this->path/$urlEncodeFileName";
@@ -75,5 +81,29 @@ class FileHandler implements FileHandlerInterface  {
     public function deleteFile($path)
     {
         // TODO: Implement deleteFile() method.
+    }
+
+    private function adjustFile($file)
+    {
+        $heightConstraint = 600;
+        $widthConstraint = 800;
+
+        $img = $this->intervention->make($file);
+
+        if($img->height() > $img->width()){
+            if($img->height() > $heightConstraint){
+                $file = $img->resize(null, $heightConstraint, function($constraint){
+                    $constraint->aspectRatio();
+                });
+            }
+        }else{
+            if($img->width() > $widthConstraint){
+                $file = $img->resize($widthConstraint, null, function($constraint){
+                    $constraint->aspectRatio();
+                });
+            }
+        }
+        return $file;
+
     }
 }

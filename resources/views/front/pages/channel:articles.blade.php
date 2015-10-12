@@ -74,34 +74,50 @@
 @section('title') Events @endsection
 
 @section('content')
+    @if($content->image1)
     {{-- The contain the carosuel --}}
     <div class="container carousel">
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                @if($content->image2)
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                @endif
+
+                @if($content->image3)
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                @endif
+
+                @if($content->image4)
+                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                @endif
+
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="http://lorempixel.com/900/500/animals/" width="100%" alt="...">
+                    <img src="{{$content->image1}}" width="100%" alt="...">
                 </div>
-                <div class="item ">
-                    <img src="http://lorempixel.com/900/500/city/" width="100%" alt="...">
-                </div>
-                <div class="item ">
-                    <img src="http://lorempixel.com/900/500/sports/" width="100%" alt="...">
-                </div>
-                <div class="item ">
-                    <img src="http://lorempixel.com/900/500/nature/" width="100%" alt="...">
-                </div>
-
+                @if($content->image2)
+                    <div class="item ">
+                        <img src="{{$content->image2}}" width="100%" alt="...">
+                    </div>
+                @endif
+                @if($content->image3)
+                    <div class="item ">
+                        <img src="{{$content->image3}}" width="100%" alt="...">
+                    </div>
+                @endif
+                @if($content->image4)
+                    <div class="item ">
+                        <img src="{{$content->image4}}" width="100%" alt="...">
+                    </div>
+                @endif
             </div>
 
+            @if($content->image2)
             <!-- Controls -->
             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -111,18 +127,35 @@
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
+            @endif
         </div>
     </div>
-
+    @endif
     {{-- Contain event blocks --}}
     <div class="container" style="padding-top:0" id="vue">
         <div class="col-md-9">
-            <div class="info" layout-content="info" content-type="text">
-                info
+        <!-- Nav tabs -->
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="#summary" aria-controls="summary" role="tab" data-toggle="tab">Summary</a></li>
+            <li role="presentation"><a href="#detail" aria-controls="detail" role="tab" data-toggle="tab">Article</a></li>
+        </ul>
+        <br>
+
+                <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="summary">
+                <div class="summary">
+                    {{$content->summary}}
+                </div>
+                <br>
             </div>
-            <div class="details" layout-content="details" content-type="text">
-                detail
+            <div role="tabpanel" class="tab-pane" id="detail">
+                <div class="details" >
+                    {!! $content->article !!}
+                </div>
             </div>
+        </div>
+
             <div class="social_link">
                 <ul class="list-inline">
                     <li><i class="fa fa-2x fa-facebook-square"></i></li>

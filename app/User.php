@@ -67,4 +67,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->create($data);
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
 }

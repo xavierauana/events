@@ -7,7 +7,6 @@ use App\Contracts\Repositories\ContentInterface;
 use App\Contracts\Repositories\MediaInterface;
 use App\Contracts\Repositories\PageInterface;
 use App\Entities\FileHandler;
-use App\Services\getContents;
 use App\Services\ParsingContentFile;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;

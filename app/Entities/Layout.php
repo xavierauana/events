@@ -259,7 +259,7 @@ class Layout {
     private function constructContentFields(array $fileName)
     {
         $contentFields = [];
-        foreach ($fileName as $index => $file) {
+        foreach ($fileName as $file) {
             $name                 = strtolower($this->getDisplayName($file));
             $contentFields[$name] = $this->parseContentFields($file, true);
             $contentFields        = $this->addFieldsByLayoutType($contentFields, $file, $name);

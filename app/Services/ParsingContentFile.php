@@ -24,6 +24,8 @@ class ParsingContentFile {
         'checkbox'=>'boolean'
     );
 
+    private $templateCategorySeparator=":";
+
 
     /**
      * Go through every layout and change their file name to a more readable layout name
@@ -41,7 +43,7 @@ class ParsingContentFile {
         if(count($layouts)>0)
         {
             foreach($layouts as $layout) {
-                if( preg_match('/(?<type>single|channel|structural):(?<name>\w+)(\.blade\.php)/i', $layout, $matches))
+                if( preg_match('/(?<type>single|channel|structural)'.$this->templateCategorySeparator.'(?<name>\w+)(\.blade\.php)/i', $layout, $matches))
                 {
                     $records[substr( $layout,strrpos($layout,'/')+1)] = ucwords(str_replace('_',' ', $matches['name']));
                 }
@@ -70,7 +72,7 @@ class ParsingContentFile {
      */
     public function getLayoutType($layout)
     {
-        $pos    = strpos($layout, ":");
+        $pos    = strpos($layout, $this->templateCategorySeparator);
         $type   = substr($layout,0, $pos);
         return $type;
     }
@@ -133,7 +135,7 @@ class ParsingContentFile {
     {
         $shorterLayout = str_replace('.blade.php', '',$name);
         $removeColonString = $shorterLayout;
-        if($pos = strpos($shorterLayout, ":")) $removeColonString = substr($shorterLayout, $pos+1);
+        if($pos = strpos($shorterLayout, $this->templateCategorySeparator)) $removeColonString = substr($shorterLayout, $pos+1);
         $properShortName = ucwords($removeColonString);
         return $properShortName;
     }
@@ -166,7 +168,7 @@ class ParsingContentFile {
     {
         $name = strtolower($layoutName);
         $layoutType = strtolower($layoutType);
-        $fullLayoutName = $layoutType.':'.$name.'.blade.php';
+        $fullLayoutName = $layoutType.$this->templateCategorySeparator.$name.'.blade.php';
         return $fullLayoutName;
     }
 

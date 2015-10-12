@@ -19,6 +19,9 @@
         }
         .hero_container .description{
             width: 30%;
+            position:absolute;
+            bottom:0;
+            margin: 0 auto;
         }
 
         .block_container .description{
@@ -70,93 +73,93 @@
 @section('content')
     <div class="container" id="vue">
         <div class="hero_container clearfix">
-            <img src="http://lorempixel.com/800/350/sports" width="100%"alt="" />
+
+            <img src="{{$contents->first()->image1}}" width="100%"alt="" />
             <div class="description text-center">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusantium consequatur, explicabo facere iure nobis quas sequi suscipit veniam voluptates?
+                {{$contents->first()->summary}}
                 <br />
-                <a href="#">MORE</a>
+                <a href="/articles/{{$contents->first()->content_identifier}}">MORE</a>
             </div>
         </div>
-
     </div>
     <div class="container">
         <div class="grid">
             <div class="grid-sizer"></div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/bwy74ok.jpg" />
+            @for($i=1; $i<count($contents); $i++)
+            <div class="grid-item ">
+                <img style="margin: 0 auto" src="{{$contents[$i]->image1}}" />
                 <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
+                    {{$contents[$i]->summary}}
                     <br />
-                    <a href="#" class="text-center">More</a>
+                    <a href="/articles/{{$contents[$i]->content_identifier}}" class="text-center">More</a>
                 </div>
             </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/bAZWoqx.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/PgmEBSB.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/aboaFoB.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/LkmcILl.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/q9zO6tw.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/r8p3Xgq.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/hODreXI.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/UORFJ3w.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
+            @endfor
+            {{--<div class="grid-item">--}}
+                {{--<img src="http://i.imgur.com/bAZWoqx.jpg" />--}}
+                {{--<div class="text-center block-description">--}}
+                    {{--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.--}}
+                    {{--<br />--}}
+                    {{--<a href="#" class="text-center">More</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="grid-item">--}}
+                {{--<img src="http://i.imgur.com/PgmEBSB.jpg" />--}}
+                {{--<div class="text-center block-description">--}}
+                    {{--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.--}}
+                    {{--<br />--}}
+                    {{--<a href="#" class="text-center">More</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="grid-item">--}}
+                {{--<img src="http://i.imgur.com/aboaFoB.jpg" />--}}
+                {{--<div class="text-center block-description">--}}
+                    {{--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.--}}
+                    {{--<br />--}}
+                    {{--<a href="#" class="text-center">More</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="grid-item">--}}
+                {{--<img src="http://i.imgur.com/LkmcILl.jpg" />--}}
+                {{--<div class="text-center block-description">--}}
+                    {{--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.--}}
+                    {{--<br />--}}
+                    {{--<a href="#" class="text-center">More</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="grid-item">--}}
+                {{--<img src="http://i.imgur.com/q9zO6tw.jpg" />--}}
+                {{--<div class="text-center block-description">--}}
+                    {{--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.--}}
+                    {{--<br />--}}
+                    {{--<a href="#" class="text-center">More</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="grid-item">--}}
+                {{--<img src="http://i.imgur.com/r8p3Xgq.jpg" />--}}
+                {{--<div class="text-center block-description">--}}
+                    {{--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.--}}
+                    {{--<br />--}}
+                    {{--<a href="#" class="text-center">More</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="grid-item">--}}
+                {{--<img src="http://i.imgur.com/hODreXI.jpg" />--}}
+                {{--<div class="text-center block-description">--}}
+                    {{--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.--}}
+                    {{--<br />--}}
+                    {{--<a href="#" class="text-center">More</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="grid-item">--}}
+                {{--<img src="http://i.imgur.com/UORFJ3w.jpg" />--}}
+                {{--<div class="text-center block-description">--}}
+                    {{--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.--}}
+                    {{--<br />--}}
+                    {{--<a href="#" class="text-center">More</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
-
-
     </div>
 
 @endsection

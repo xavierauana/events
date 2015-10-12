@@ -2,73 +2,163 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ParseUrl;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Favorite;
+use App\Services\PerformanceLogger;
+use App\Contracts\Repositories\ContentInterface;
+use App\Services\ParsingContentFile;
+use App\Services\HttpRequest;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Collection;
 
 class ApisController extends Controller
 {
-    private $requestObject;
+    private $domains;
+    private $httpRequest;
+    private $noSearchResult;
 
     /**
      * ApisController constructor.
-     *
-     * @param $requestObject
+     * @param $domains
      */
     public function __construct()
     {
+        $this->domains = [
+            "search", "favorite"
+        ];
     }
 
 
-    public function route(Request $request)
+    public function route(Request $request, PerformanceLogger $logger, $domain, $param1=null, $param2=null)
     {
-        $this->requestObject = new ParseUrl($request);
-        if($request->ajax()){
-            $this->requestObject = new ParseUrl($request);
+       if(in_array($domain, $this->domains)){
+           if($domain == "favorite" and $request->ajax() and $request->user()){
+               if($request->isMethod('post')){
+                   return $this->toggleFavorite($request, $param1, $param2);
+               }elseif($request->isMethod('get')){
+                   return $this->getFavorite($request, $param1, $param2);
+               }
+           }elseif($domain == "search"){
+               $this->httpRequest = new HttpRequest($request);
 
-            if($this->requestObject->type == 'single'){
-                return $this->getSingleContentAndRenderView();
-            }
-            if($this->requestObject->type == 'channel'){
-                return $this->getChannelContentAndRenderView();
-            }
-            if($this->requestObject->type == 'structural'){
-                return $this->getStructuralContentAndRenderView();
-            }
+               $logger->start();
+
+               $result = $this->parseSearchQuery();
+
+               $logger->end();
+
+
+               if($this->httpRequest->isAjax){
+                   if(count($result)>0){
+                       return ["response"=>"completed","result"=>$result];
+                   }else{
+                       return ["response"=>"completed","result"=>null];
+                   }
+               }else{
+                   return view("front.pages.search",compact("result"));
+               }
+           }
+       }
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param                          $param1
+     * @param                          $param2
+     * @return array
+     */
+    private function toggleFavorite(Request $request, $param1, $param2)
+    {
+        $favorite = Favorite::whereUserId($request->user()->id)->whereType($param1)->whereContentIdentifier($param2)->first();
+        if ($favorite) {
+            $favorite->delete();
+
+            return ['response' => 'completed', "result" => false];
+        } else {
+            Favorite::create([
+                                 "user_id"    => $request->user()->id,
+                                 "type"       => $param1,
+                                 "content_identifier" => $param2
+                             ]);
+
+            return ['response' => 'completed', "result" => true];
         }
     }
 
-    private function getSingleContentAndRenderView()
+    private function parseSearchQuery()
     {
-        $table = (new ParsingContentFile())->getLayoutTableName($this->requestObject->page->template->file);
-        $content = $this->contentService->retrieveContentForFrontEndWithLangId($this->requestObject->language->id, $table)->first();
-        if($this->requestObject->isAjax) return $content;
-        return view("front.pages.".$this->requestObject->page->template->view, compact("content"));
-    }
 
-    private function getChannelContentAndRenderView()
-    {
-        $object = $this->requestObject;
-        $table = (new ParsingContentFile())->getLayoutTableName($this->requestObject->page->template->file);
-        $contents = $this->contentService->retrieveContentForFrontEndWithLangId($this->requestObject->language->id, $table);
-        if($this->requestObject->identifier){
-            $content = $contents->filter(function($item)use($object){
-                if($item->content_identifier == $object->identifier) return true;
+        $queries = $this->httpRequest->queries;
+        $contentObject = App::make(ContentInterface::class);
+        if( ! count($queries)>0){
+            return false;
+        }
+
+        if(array_has($queries, "page")){
+            $page = cache('pages')->filter(function($cachedPage)use($queries){
+                return $cachedPage->url == $queries["page"];
             })->first();
-            if(count($content)>0){
-                if($this->requestObject->isAjax) return $content;
-                return view("front.pages.".$this->requestObject->page->template->view, compact('content'));
+            if(!$page){
+                $this->noSearchResult = true;
+            } else{
+                $tables =[(new ParsingContentFile())->getLayoutTableName($page->template->file)];
+                unset($queries['page']);
             }
-            abort(404, $this->message_404);
+        }else{
+            $unique = cache('pages')->unique(function($page){
+                return $page->template->file;
+            });
+
+            foreach($unique as $page){
+                $tables[] = (new ParsingContentFile())->getLayoutTableName($page->template->file);
+            }
         }
-        if($this->requestObject->isAjax) return $contents;
-        return view("front.pages.".$this->requestObject->page->template->view."_index", compact('contents'));
+
+
+
+        if($this->noSearchResult){
+            return false;
+        }
+
+        $key = "search_";
+        foreach($tables as $table){
+            $key .= $table."_";
+        }
+        foreach($queries as $key=>$val){
+            $key .= $key."_".$val."_";
+        }
+        if (cache()->has($key)){
+            return cache($key);
+        }else{
+            return cache()->remember($key, 1, function()use($tables, $contentObject, $queries){
+                $searchResult = new Collection();
+                foreach($tables as $table){
+                    $contentObject->setTable($table);
+                    foreach($queries as $col=>$val){
+                        if($col == "limit"){
+                            $val = (int) $val;
+                            $contentObject = $contentObject->search($col, $val);
+                        }else{
+                            $contentObject = $contentObject->search($col, $val);
+                        }
+                    }
+                    $searchResult = $searchResult->merge($contentObject->get()->all());
+                }
+                return $searchResult;
+            });
+        }
 
     }
 
-    private function getStructuralContentAndRenderView()
+    private function getFavorite($request, $param1, $param2)
     {
+        $favorite = Favorite::whereUserId($request->user()->id)->whereType($param1)->whereContentIdentifier($param2)->first();
+        if ($favorite) {
+            return ['response' => 'completed', "result" => true];
+        }
+        return ['response' => 'completed', "result" => false];
     }
 }

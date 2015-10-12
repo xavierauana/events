@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Contracts\Repositories\LanguageInterface;
 use App\Contracts\Repositories\PageInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 
 class SettingServiceProvider extends ServiceProvider
@@ -49,7 +48,7 @@ class SettingServiceProvider extends ServiceProvider
         cache()->rememberForever("pages", function()use($pageObject){
             return $pageObject->whereActive(1)->with("template")->get();
         });
-        cache()->forever("timezone", setting("timezone"));
+//        cache()->forever("timezone", setting("timezone"));
         cache()->forever("dateTimeFormat", "Do MMMM YYYY hh:mm A");
         config(["app.locale" => cache("default_language")->code]);
         config(['app.timezone' => cache("timezone")]);

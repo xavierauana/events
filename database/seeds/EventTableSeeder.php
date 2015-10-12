@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class EventTableSeeder extends Seeder
@@ -11,7 +12,6 @@ class EventTableSeeder extends Seeder
      */
     public function run()
     {
-
         $page = cache('pages')->filter(function($page){
            return $page->url == "events";
         })->first();
@@ -42,6 +42,8 @@ class EventTableSeeder extends Seeder
                     for($i = 0; $i<$number; $i++){
                         $type = $photoType[rand(0,12)];
                         $cat = $catList[rand(0,3)];
+                        $startDate = Carbon::create(2015,$month,$date);
+                        $endDate = Carbon::create(2015,$month,$date)->addDays(rand(1,5));
                         $data = [
                             'lang_id' => 1,
                             'meta_title' => "Event $i on day $day",
@@ -49,8 +51,8 @@ class EventTableSeeder extends Seeder
                             'page_id' => $page->id,
                             'content_identifier' => "event_seeder_$month-$day-$i",
                             'active' => 1,
-                            'eventStartDate' => "2015-$month-$date 13:00:00",
-                            'eventEndDate' => "2015-$month-$date 23:00:00",
+                            'eventStartDate' => $startDate->format("Y-m-d h:i:s"),
+                            'eventEndDate' => $endDate->format("Y-m-d h:i:s"),
                             'address' => "hong Kong",
                             'image1' => "http://lorempixel.com/380/300/$type",
                             'image2' => "http://lorempixel.com/380/300/$type",
