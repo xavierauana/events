@@ -14,7 +14,8 @@
             "richtext"=>"Rich format text",
             "image"=>"Image",
             "file"=>"File",
-            "datetime"=>"Date and Time"
+            "datetime"=>"Date and Time",
+            "link"=>"Link to other table"
         ];
     }
 
