@@ -1,4 +1,8 @@
-
+@inject('object', 'App\Services\Content')
+<?php
+$object->setTable('layout_writers');
+$writer = $object->whereContentIdentifier($content->writer_identifier)->whereActive(1)->first();
+?>
 @extends('front.layouts.default')
 
 @section('meta')
@@ -181,11 +185,11 @@
             </div>
         </div>
         <div class="col-md-3">
-            <img class="img-responsive" src="http://lorempixel.com/600/500/people/" alt="" />
+            <img class="img-responsive" src="{{$writer->thumbnail}}" alt="" />
             <div class="writer_description" layout-content="writer_description" content-type="text">
-                writer description
+                {{$writer->summary}}
             </div>
-            <a href="/writer/id" class="writer_profile">MORE</a>
+            <a href="/writers/{{$writer->content_identifier}}" class="writer_profile">MORE</a>
         </div>
     </div>
 

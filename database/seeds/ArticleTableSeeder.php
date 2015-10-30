@@ -37,6 +37,7 @@ class ArticleTableSeeder extends Seeder
                 'meta_description' => "Lorem ipsum dolor sit amet, ea elit dolore urbanitas quo. Est assum cetero ei. Eam semper docendi id. Mucius doming.",
                 'page_id' => $page->id,
                 'content_identifier' => "article_$i",
+                'writer_identifier' => "writer_".rand(0,20),
                 'active' => true,
                 'image1' => "http://lorempixel.com/$width/$height/$type",
                 'summary' => "Lorem ipsum dolor sit amet, ea elit dolore urbanitas quo. Est assum cetero ei. Eam semper docendi id. Mucius doming.",

@@ -25,10 +25,10 @@ class getFrontEndContent
     }
 
 
-    public function getContent($action, HttpRequest $httpRequest)
+    public function getContent($layoutType, HttpRequest $httpRequest)
     {
-        if(method_exists($this, $action)){
-            return $this->$action($httpRequest);
+        if(method_exists($this, $layoutType)){
+            return $this->$layoutType($httpRequest);
         }
     }
 
@@ -46,7 +46,7 @@ class getFrontEndContent
                 abort(404, $this->message_404);
             }
         }else{
-            $contents = $this->contentService->retrieveContentForFrontEndWithLangId($httpRequest->language->id, $table);
+            $contents = $this->contentService->retrieveContentForFrontEndWithLangId($httpRequest->language->id, $table)->sortByDesc('created_at');
         }
         return $contents;
     }

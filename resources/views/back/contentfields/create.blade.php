@@ -94,7 +94,7 @@ foreach($layoutTables as $layoutTable){
 
         var showTableFields = function(el){
             $("#linkColumn").removeClass('hidden');
-            $(el).parent("td").siblings("td.tableFields").removeC`lass("hidden");
+            $(el).parent("td").siblings("td.tableFields").removeClass("hidden");
         }
 
         var typeChange = function(el){

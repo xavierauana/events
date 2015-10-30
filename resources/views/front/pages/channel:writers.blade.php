@@ -1,3 +1,8 @@
+@inject('object', 'App\Services\Content')
+<?php
+    $object->setTable('layout_articles');
+        $articles = $object->whereWriterIdentifier($content->content_identifier)->whereActive(1)->get();
+?>
 @extends('front.layouts.default')
 
 @section('stylesheets')
@@ -73,90 +78,28 @@
 @section('content')
     <div class="container">
         <div class="hero_container clearfix">
-            <img src="http://lorempixel.com/800/350/sports" width="100%"alt="" />
+            <img src="{{$content->pic}}" width="100%"alt="" />
         </div>
         <div class="writer_description">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci alias aut autem debitis dolore dolorem ea eaque ex facilis, impedit iste natus numquam qui reprehenderit saepe sint suscipit veniam voluptatum.
+            {{$content->intro}}
         </div>
     </div>
     <div class="container">
-        <div class="grid">
-            <div class="grid-sizer"></div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/bwy74ok.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
+        @if(count($articles)>0)
+            <div class="grid">
+                <div class="grid-sizer"></div>
+                @foreach($articles as $article)
+                    <div class="grid-item">
+                        <img src="{{$article->image1}}" />
+                        <div class="text-center block-description">
+                            {{$article->summary}}
+                            <br />
+                            <a href="/articles/{{$article->content_identifier}}" class="text-center">More</a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/bAZWoqx.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/PgmEBSB.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/aboaFoB.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/LkmcILl.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/q9zO6tw.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/r8p3Xgq.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/hODreXI.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="http://i.imgur.com/UORFJ3w.jpg" />
-                <div class="text-center block-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro.
-                    <br />
-                    <a href="#" class="text-center">More</a>
-                </div>
-            </div>
-        </div>
-
-
+        @endif
     </div>
 
 @endsection

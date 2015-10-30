@@ -34,115 +34,19 @@
 @section('content')
     <div class="container" style="padding-top:0">
         <div class="main_image">
-            <img src="http://lorempixel.com/1600/600/" class="img-responsive" alt="" />
+            <img src="{{$contents->first()->pic}}" class="img-responsive" alt="" />
         </div>
         <div class="content" style="margin: 0 15px">
             <div class="row">
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
-                <div class="col-md-4 col-xs-6 blocks">
-                    <img src="http://lorempixel.com/400/300/" class="img-responsive" alt="" />
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eius facilis illo labore nemo pariatur quis tenetur voluptate voluptatem!
-                    </p>
-                    <a href="writers/1">VIEW MORE</a>
-                </div>
+                @foreach($contents as $content)
+                    <div class="col-md-4 col-xs-6 blocks">
+                        <img src="{{$content->thumbnail}}" class="img-responsive" alt="" />
+                        <p class="description">
+                            {{$content->summary}}
+                        </p>
+                        <a href="writers/{{$content->content_identifier}}">VIEW MORE</a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
