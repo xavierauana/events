@@ -144,8 +144,8 @@ return [
          */
         App\Providers\InterfaceBindingServiceProvider::class,
         App\Providers\AppServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
         App\Providers\SettingServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],

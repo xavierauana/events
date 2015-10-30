@@ -27,7 +27,6 @@ class CKEditorController extends Controller
         $funcNum = $request->CKEditorFuncNum;
         $url = $fileObject->link;
         $message = "image upload";
-        return "<script type='text/javascript'> window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>";;
+        return "<script type='text/javascript'> window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>";
     }
-
 }

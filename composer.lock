@@ -4,8 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "9a7b5a89562a8f5e709c1191e3c96e26",
     "content-hash": "b4750ae6ea6d467df359aa76c92dc966",
+    "hash": "b88e8513ecde9e0483baca79c7086cce",
+>>>>>>> 9b5d7c2a9fc3ae3f7d71078e162051b4f75b8259
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -218,6 +221,7 @@
             "time": "2014-12-20 21:24:13"
         },
         {
+<<<<<<< HEAD
             "name": "facebook/php-sdk-v4",
             "version": "5.0.0",
             "source": {
@@ -273,6 +277,8 @@
             "time": "2015-07-08 19:08:57"
         },
         {
+=======
+>>>>>>> 9b5d7c2a9fc3ae3f7d71078e162051b4f75b8259
             "name": "guzzlehttp/psr7",
             "version": "1.2.0",
             "source": {

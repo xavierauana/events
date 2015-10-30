@@ -20,6 +20,10 @@ use Illuminate\Http\Request;
 //Route::get('writers/detail', function(){
 //   return View::make('front.pages.channel:writers');
 //});
+    /*
+     * This section is for routing page for login into back end system
+     */
+    require_once __DIR__."/Routes/systemRoutes.php";
 
 
 Route::get('fbLoginCallback', function(Request $request){

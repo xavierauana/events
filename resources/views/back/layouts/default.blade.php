@@ -57,8 +57,8 @@
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
 
-<script src="//cdn.ckeditor.com/4.5.1/full-all/ckeditor.js"></script>
-<script src="//cdn.ckeditor.com/4.5.1/full-all/adapters/jquery.js"></script>
+<script src="//cdn.ckeditor.com/4.5.3/full-all/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.5.3/full-all/adapters/jquery.js"></script>
 <script src="{{elixir("back/js/back.js")}}"></script>
 @yield('scripts')
 </body>
