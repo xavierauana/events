@@ -1,19 +1,3 @@
-<?php
-{{--$tables = DB::select('SHOW TABLES');--}}
-{{----}}
-{{--$layoutTableObjects = array_filter($tables, function($table){--}}
-{{--    if(strpos($table->Tables_in_events, "_")){--}}
-{{--        return str_split($table->Tables_in_events, strpos($table->Tables_in_events, "_"))[0] == 'layout'? true: false;--}}
-{{--    }--}}
-{{--});--}}
-{{--$layoutTables = array_map(function($tableObject){--}}
-{{--    return $tableObject->Tables_in_events;--}}
-{{--}, $layoutTableObjects);--}}
-{{----}}
-{{--foreach($layoutTables as $layoutTable){--}}
-{{--    $layoutTableField[$layoutTable] = $layoutTable;--}}
-{{--}--}}
-?>
 @extends('back.layouts.default')
 
 @section('content')
@@ -28,8 +12,7 @@
                     </ul>
                 @endif
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create Content Fields for {{$template->display}} Template
-                        <button class="btn btn-xs btn-primary pull-right" onclick="more();">more fields</button> </div>
+                    <div class="panel-heading">Create Content Fields for {{$template->display}} Template </div>
                     <div class="panel-body">
                         {!!  Form::open(array("route"=>array('admin.contentfields.store', $template->id), "role"=>"form", "method"=>"POST")) !!}
 
@@ -50,10 +33,16 @@
                             <tfoot>
                             <tr>
                                 <td colspan="7">
+                                    <button class="btn btn-xs btn-primary pull-right" onclick="more();">more fields</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">
                                     <input type="submit" value="Create" class="btn btn-success btn-block">
                                     <a href="{{route("admin.templates.index")}}" class="btn btn-info btn-block">back</a>
                                 </td>
                             </tr>
+
                             </tfoot>
                         </table>
                         {!!  Form::close() !!}
