@@ -1,18 +1,18 @@
 <?php
-$tables = DB::select('SHOW TABLES');
-
-$layoutTableObjects = array_filter($tables, function($table){
-    if(strpos($table->Tables_in_events, "_")){
-        return str_split($table->Tables_in_events, strpos($table->Tables_in_events, "_"))[0] == 'layout'? true: false;
-    }
-});
-$layoutTables = array_map(function($tableObject){
-    return $tableObject->Tables_in_events;
-}, $layoutTableObjects);
-
-foreach($layoutTables as $layoutTable){
-    $layoutTableField[$layoutTable] = $layoutTable;
-}
+{{--$tables = DB::select('SHOW TABLES');--}}
+{{----}}
+{{--$layoutTableObjects = array_filter($tables, function($table){--}}
+{{--    if(strpos($table->Tables_in_events, "_")){--}}
+{{--        return str_split($table->Tables_in_events, strpos($table->Tables_in_events, "_"))[0] == 'layout'? true: false;--}}
+{{--    }--}}
+{{--});--}}
+{{--$layoutTables = array_map(function($tableObject){--}}
+{{--    return $tableObject->Tables_in_events;--}}
+{{--}, $layoutTableObjects);--}}
+{{----}}
+{{--foreach($layoutTables as $layoutTable){--}}
+{{--    $layoutTableField[$layoutTable] = $layoutTable;--}}
+{{--}--}}
 ?>
 @extends('back.layouts.default')
 
