@@ -64,7 +64,7 @@ class FileHandler implements FileHandlerInterface  {
         $urlEncodeFileName = urlencode($filename);
 
         // adjust image size by Intervention and get back a intervention file object
-        $file = $this->adjustFile($file);
+//        $file = $this->adjustFile($file);
 
         // move the upload file to the designated location
 //        $file->save($directory."/".$urlEncodeFileName);
