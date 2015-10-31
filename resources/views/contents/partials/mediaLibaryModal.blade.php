@@ -24,7 +24,7 @@
                                         <div class="img-container img-rounded"
                                              data-index="@{{ $index }}"
                                                 style="width: 120px; height:120px; overflow: hidden; margin-top:15px; margin-bottom:15px;">
-                                            <img v-on="click: toggleSelect" src="@{{file.link}}" class="img-responsive" alt="">
+                                            <img v-on="click: toggleSelect" src="@{{ file.link }}" class="img-responsive" alt="">
                                         </div>
                                     </div>
                                 </div>
