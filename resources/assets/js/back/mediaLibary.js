@@ -129,9 +129,6 @@ Dropzone.options.myFileDropzone = {
     init: function() {
         this.on("success", function(file) {
             var responseObject = JSON.parse(file.xhr.response);
-            console.log('the following is dropzone response object');
-            console.log(responseObject);
-            console.log(responseObject.fileObject);
             photoVue.addNewMedia(responseObject.fileObject);
         });
     }
