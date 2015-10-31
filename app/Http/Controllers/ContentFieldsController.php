@@ -190,7 +190,7 @@ class ContentFieldsController extends Controller
 
     public function check($templateId)
     {
-        $template = App::make(Template::class)->with("contentfields")->whereId($templateId)->first();
+        $template = Template::with("contentfields")->whereId($templateId)->first();
         if(count($template->contentfields)>0){
             return view("back.contentfields.edit", compact("template"));
         }

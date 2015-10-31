@@ -21,9 +21,6 @@
         <td>
             {!! Form::text("pattern[]",null, ["class"=>"form-control"]) !!}
         </td>
-        <td class="hidden tableFields">
-            {!! Form::select("table[]",$layoutTableField,null, ["class"=>"form-control"]) !!}
-        </td>
         <td>
             <button class="btn btn-danger btn-sm" onclick="removeField(this); return false">remove</button>
         </td>

@@ -12,7 +12,8 @@
                     </ul>
                 @endif
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create Content Fields for {{$template->display}} Template </div>
+                    <div class="panel-heading">Create Content Fields for {{$template->display}} Template
+                        <button class="btn btn-xs btn-primary pull-right" onclick="more();">more fields</button> </div>
                     <div class="panel-body">
                         {!!  Form::open(array("route"=>array('admin.contentfields.store', $template->id), "role"=>"form", "method"=>"POST")) !!}
 
@@ -33,16 +34,10 @@
                             <tfoot>
                             <tr>
                                 <td colspan="7">
-                                    <button class="btn btn-xs btn-primary pull-right" onclick="more();">more fields</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="7">
                                     <input type="submit" value="Create" class="btn btn-success btn-block">
                                     <a href="{{route("admin.templates.index")}}" class="btn btn-info btn-block">back</a>
                                 </td>
                             </tr>
-
                             </tfoot>
                         </table>
                         {!!  Form::close() !!}
