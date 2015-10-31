@@ -81,7 +81,7 @@
             <img src="{{$content->pic}}" width="100%"alt="" />
         </div>
         <div class="writer_description">
-            {{$content->intro}}
+            {!!  $content->intro !!}
         </div>
     </div>
     <div class="container">
