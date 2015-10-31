@@ -96,6 +96,3 @@
     </div>
     @include("contents.partials.mediaLibaryModal")
 @endsection
-
-@section('scripts')
-@endsection

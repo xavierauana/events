@@ -111,6 +111,7 @@ var photoVue = new Vue({
         }
     },
     ready: function(){
+        console.log('file get image ajax');
         this.$http.get("/admin/files",function(data, status, request){
             this.$set("media", data);
             console.log(data);
