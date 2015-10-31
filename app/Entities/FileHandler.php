@@ -67,7 +67,8 @@ class FileHandler implements FileHandlerInterface  {
         $file = $this->adjustFile($file);
 
         // move the upload file to the designated location
-        $file->save($directory."/".$urlEncodeFileName);
+//        $file->save($directory."/".$urlEncodeFileName);
+        $file->move($directory, $urlEncodeFileName);
 
         // return the absolute file path
         return "$this->path/$urlEncodeFileName";
