@@ -39,8 +39,8 @@
         <div class="content" style="margin: 0 15px">
             <div class="row">
                 @foreach($contents as $content)
-                    <div class="col-md-4 col-xs-6 blocks center-block">
-                        <img src="{{$content->thumbnail}}" class="img-responsive" alt="" />
+                    <div class="col-md-4 col-xs-6 blocks">
+                        <img src="{{$content->thumbnail}}" class="img-responsive center-block" alt="" />
                         <p class="description">
                             {{$content->summary}}
                         </p>
