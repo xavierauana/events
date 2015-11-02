@@ -176,7 +176,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/vendor/ckeditor/lang/ca.js" afterPath="$PROJECT_DIR$/resources/vendor/ckeditor/lang/ca.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ca.js" afterPath="$PROJECT_DIR$/resources/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ca.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/vendor/ckeditor/plugins/specialchar/dialogs/lang/ca.js" afterPath="$PROJECT_DIR$/resources/vendor/ckeditor/plugins/specialchar/dialogs/lang/ca.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/front/pages/channel:articles.blade.php" afterPath="$PROJECT_DIR$/resources/views/front/pages/channel:articles.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/vendor/ckeditor/plugins/forms/dialogs/checkbox.js" afterPath="$PROJECT_DIR$/resources/vendor/ckeditor/plugins/forms/dialogs/checkbox.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/vendor/ckeditor/plugins/wsc/dialogs/ciframe.html" afterPath="$PROJECT_DIR$/resources/vendor/ckeditor/plugins/wsc/dialogs/ciframe.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/vendor/ckeditor/ckeditor.js" afterPath="$PROJECT_DIR$/resources/vendor/ckeditor/ckeditor.js" />
@@ -421,8 +420,8 @@
       <file leaf-file-name="channel:articles.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/front/pages/channel:articles.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5970696">
-              <caret line="192" column="22" selection-start-line="192" selection-start-column="22" selection-end-line="192" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.37728938">
+              <caret line="175" column="18" selection-start-line="175" selection-start-column="18" selection-end-line="175" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -1183,8 +1182,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/front/pages/channel:articles.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5970696">
-          <caret line="192" column="22" selection-start-line="192" selection-start-column="22" selection-end-line="192" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.37728938">
+          <caret line="175" column="18" selection-start-line="175" selection-start-column="18" selection-end-line="175" selection-end-column="18" />
           <folding />
         </state>
       </provider>

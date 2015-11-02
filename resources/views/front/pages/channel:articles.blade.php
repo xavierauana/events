@@ -174,15 +174,6 @@ $writer = $object->whereContentIdentifier($content->writer_identifier)->whereAct
                 <a href="#" class="pull-left">Previous</a>
                 <a href="#" class="pull-right">Next</a>
             </div>
-
-            <div class="hidden-xs hidden-sm">
-                <div class="row">
-                    <div class="col-md-3">testing1</div>
-                    <div class="col-md-3">testing2</div>
-                    <div class="col-md-3">testing3</div>
-                    <div class="col-md-3">testing4</div>
-                </div>
-            </div>
         </div>
         <div class="col-md-3">
             @if($writer)
