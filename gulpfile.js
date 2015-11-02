@@ -20,6 +20,8 @@ elixir(function(mix) {
 
     mix.browserify('month.js', './public/js/monthBundle.js');
 
+    mix.copy('resources/vendor/ckeditor','public/js/ckeditor');
+
     // Concatenate All Front End Script Files
     mix.scripts([
         "bootstrap/dist/js/bootstrap.min.js",

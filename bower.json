@@ -28,9 +28,12 @@
     "fontawesome": "~4.3.0",
     "clndr": "~1.2.12",
     "vue-resource": "~0.1.3",
-    "ckeditor": "#full/4.3.3",
+    "ckeditor": "~4.5.4",
     "eonasdan-bootstrap-datetimepicker": "~4.15.35",
     "dropzone": "~4.0.1",
     "select2": "~4.0.0"
+  },
+  "resolutions": {
+    "ckeditor": "~4.5.4"
   }
 }

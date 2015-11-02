@@ -185,11 +185,13 @@ $writer = $object->whereContentIdentifier($content->writer_identifier)->whereAct
             </div>
         </div>
         <div class="col-md-3">
-            <img class="img-responsive" src="{{$writer->thumbnail}}" alt="" />
-            <div class="writer_description" layout-content="writer_description" content-type="text">
-                {{$writer->summary}}
-            </div>
-            <a href="/writers/{{$writer->content_identifier}}" class="writer_profile">MORE</a>
+            @if($writer)
+                <img class="img-responsive" src="{{$writer->thumbnail}}" alt="" />
+                <div class="writer_description" layout-content="writer_description" content-type="text">
+                    {{$writer->summary}}
+                </div>
+                <a href="/writers/{{$writer->content_identifier}}" class="writer_profile">MORE</a>
+            @endif
         </div>
     </div>
 
